@@ -1,0 +1,106 @@
+{
+  "app": {
+    "name": "PropAI",
+    "tagline": "AI-Powered Real Estate Analysis"
+  },
+  "nav": {
+    "home": "Home",
+    "upload": "Upload",
+    "analysis": "Analysis",
+    "dashboard": "Dashboard",
+    "settings": "Settings"
+  },
+  "home": {
+    "title": "AI-Powered Real Estate Analysis",
+    "subtitle": "Upload property documents and get instant insights",
+    "getStarted": "Get Started",
+    "howItWorks": "How It Works",
+    "step1": {
+      "title": "Upload PDF",
+      "description": "Upload your property document in PDF format"
+    },
+    "step2": {
+      "title": "Extract Information",
+      "description": "Our AI extracts key information from your document"
+    },
+    "step3": {
+      "title": "Verify Details",
+      "description": "Compare with listings from popular real estate platforms"
+    },
+    "step4": {
+      "title": "Get Insights",
+      "description": "Receive detailed analysis and actionable insights"
+    }
+  },
+  "upload": {
+    "title": "Upload Property Document",
+    "subtitle": "Drag and drop your PDF or click to browse",
+    "fileTypes": "Accepted file types: PDF",
+    "maxSize": "Maximum file size: 10MB",
+    "preview": "Document Preview",
+    "extracted": "Extracted Information",
+    "property": {
+      "price": "Price",
+      "location": "Location",
+      "area": "Area",
+      "bedrooms": "Bedrooms",
+      "bathrooms": "Bathrooms"
+    },
+    "verify": "Verify Details"
+  },
+  "analysis": {
+    "title": "Property Analysis",
+    "subtitle": "Verification results and insights",
+    "propertyDetails": "Property Details",
+    "marketComparison": "Market Comparison",
+    "brokerListings": "Broker Listings",
+    "insights": "AI Insights",
+    "platform": "Platform",
+    "price": "Price",
+    "difference": "Difference",
+    "status": "Status"
+  },
+  "dashboard": {
+    "title": "Your Dashboard",
+    "subtitle": "Track your property documents and analysis",
+    "recentUploads": "Recent Uploads",
+    "stats": "Your Stats",
+    "uploaded": "Uploaded",
+    "verified": "Verified",
+    "issues": "Issues Found"
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Customize your experience",
+    "appearance": "Appearance",
+    "language": "Language",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "theme": {
+      "label": "Theme",
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "languages": {
+      "english": "English",
+      "hindi": "Hindi",
+      "kannada": "Kannada"
+    },
+    "notificationSettings": {
+      "email": "Email Notifications",
+      "push": "Push Notifications",
+      "updates": "Product Updates"
+    },
+    "profileSettings": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "save": "Save Changes"
+  },
+  "notFound": {
+    "title": "Oops! Property Not Found",
+    "subtitle": "Looks like this property listing has gone missing",
+    "backHome": "Back to Home"
+  }
+}

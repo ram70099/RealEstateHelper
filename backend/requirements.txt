@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+PyMuPDF
+azure-core
+autogen-agentchat @ git+https://github.com/microsoft/autogen.git
+autogen-ext @ git+https://github.com/microsoft/autogen.git#subdirectory=extensions
+aiofiles
