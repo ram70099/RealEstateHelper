@@ -60,7 +60,7 @@ async def run_property_extraction(text: str):
                 json_text = json_blocks[-1].strip() if json_blocks else message.content.strip()
                 result = json.loads(json_text)
             except Exception as e:
-                logger.error(f"JSON parse error: {e} | Content: {message.content}")
+                logger.error(f"JSON parse error: {e} ")
                 result = {
                     "error": "JSON parse error",
                     "details": str(e),

@@ -1,1 +1,218 @@
-[]
+[
+  {
+    "id": "1",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 3901 Capitol St - Ironworks Campus",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 3901 Capitol St - Ironworks Campus\nAddress: 3901 Capitol St, Houston, Texas 77023\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:11:17.855869"
+  },
+  {
+    "id": "5",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 3302 Canal St - The Plant Second Ward",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 3302 Canal St - The Plant Second Ward\nAddress: 3302 Canal St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:11:18.222640"
+  },
+  {
+    "id": "8",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:11:18.657984"
+  },
+  {
+    "id": "7",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 908 Live Oak St - Building 7",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 908 Live Oak St - Building 7\nAddress: 908 Live Oak St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:11:19.146371"
+  },
+  {
+    "id": "2",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 2501 Commerce",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 2501 Commerce\nAddress: 2501 Commerce, Houston, Texas 77003\nRent: \u20b9$19.00 SF/year/NNN\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:11:19.600582"
+  },
+  {
+    "id": "6",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 1005 Hutchins St - East Blocks",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 1005 Hutchins St - East Blocks\nAddress: 1005 Hutchins St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:11:20.070614"
+  },
+  {
+    "id": "3",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 100 Jensen Dr - East River Three",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 100 Jensen Dr - East River Three\nAddress: 100 Jensen Dr, Houston, Texas 77020\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:11:20.500529"
+  },
+  {
+    "id": "4",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 2600 Commerce St - 2600 Commerce",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 2600 Commerce St - 2600 Commerce\nAddress: 2600 Commerce St, Houston, Texas 77003\nRent: \u20b9$18.00 SF/year/NNN\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:11:20.957466"
+  },
+  {
+    "id": "5",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 3302 Canal St - The Plant Second Ward",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 3302 Canal St - The Plant Second Ward\nAddress: 3302 Canal St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:14:28.795596"
+  },
+  {
+    "id": "3",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 100 Jensen Dr - East River Three",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 100 Jensen Dr - East River Three\nAddress: 100 Jensen Dr, Houston, Texas 77020\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:14:29.261219"
+  },
+  {
+    "id": "6",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 1005 Hutchins St - East Blocks",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 1005 Hutchins St - East Blocks\nAddress: 1005 Hutchins St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:14:29.684294"
+  },
+  {
+    "id": "2",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 2501 Commerce",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 2501 Commerce\nAddress: 2501 Commerce, Houston, Texas 77003\nRent: \u20b9$19.00 SF/year/NNN\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:14:30.181836"
+  },
+  {
+    "id": "1",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 3901 Capitol St - Ironworks Campus",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 3901 Capitol St - Ironworks Campus\nAddress: 3901 Capitol St, Houston, Texas 77023\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:14:30.573862"
+  },
+  {
+    "id": "4",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 2600 Commerce St - 2600 Commerce",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 2600 Commerce St - 2600 Commerce\nAddress: 2600 Commerce St, Houston, Texas 77003\nRent: \u20b9$18.00 SF/year/NNN\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:14:31.064709"
+  },
+  {
+    "id": "7",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 908 Live Oak St - Building 7",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 908 Live Oak St - Building 7\nAddress: 908 Live Oak St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:14:31.546921"
+  },
+  {
+    "id": "8",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:14:32.074651"
+  },
+  {
+    "id": "2",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 2501 Commerce",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 2501 Commerce\nAddress: 2501 Commerce, Houston, Texas 77003\nRent: \u20b9$19.00 SF/year/NNN\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:16:40.788831"
+  },
+  {
+    "id": "5",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 3302 Canal St - The Plant Second Ward",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 3302 Canal St - The Plant Second Ward\nAddress: 3302 Canal St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:16:41.060880"
+  },
+  {
+    "id": "4",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 2600 Commerce St - 2600 Commerce",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 2600 Commerce St - 2600 Commerce\nAddress: 2600 Commerce St, Houston, Texas 77003\nRent: \u20b9$18.00 SF/year/NNN\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:16:41.579537"
+  },
+  {
+    "id": "3",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 100 Jensen Dr - East River Three",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 100 Jensen Dr - East River Three\nAddress: 100 Jensen Dr, Houston, Texas 77020\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:16:42.034934"
+  },
+  {
+    "id": "6",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 1005 Hutchins St - East Blocks",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 1005 Hutchins St - East Blocks\nAddress: 1005 Hutchins St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:16:42.413337"
+  },
+  {
+    "id": "1",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 3901 Capitol St - Ironworks Campus",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 3901 Capitol St - Ironworks Campus\nAddress: 3901 Capitol St, Houston, Texas 77023\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:16:42.873256"
+  },
+  {
+    "id": "8",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:16:43.435182"
+  },
+  {
+    "id": "7",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 908 Live Oak St - Building 7",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 908 Live Oak St - Building 7\nAddress: 908 Live Oak St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T12:16:43.850357"
+  }
+]
