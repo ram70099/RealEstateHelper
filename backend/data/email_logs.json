@@ -14,7 +14,7 @@
     "to": "shah70099053@gmail.com",
     "subject": "Interest in Property: 3302 Canal St - The Plant Second Ward",
     "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 3302 Canal St - The Plant Second Ward\nAddress: 3302 Canal St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
-    "status": "sent",
+    "status": "failed",
     "timestamp": "2025-06-01T12:11:18.222640"
   },
   {
@@ -23,7 +23,7 @@
     "to": "shah70099053@gmail.com",
     "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
     "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
-    "status": "sent",
+    "status": "pending",
     "timestamp": "2025-06-01T12:11:18.657984"
   },
   {

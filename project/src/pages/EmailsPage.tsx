@@ -1,29 +1,29 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Filter, Mail } from 'lucide-react';
 import EmailLogItem from '../components/EmailLog/EmailLogItem';
+import EmailDetailsModal from '../components/EmailLog/EmailDetailsModal';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import './EmailsPage.css';
 
-// Define the EmailLog type
 interface EmailLog {
   id: string;
   from: string;
+  to?: string;
   subject: string;
   status: 'sent' | 'failed' | 'pending';
   timestamp: string;
   body: string;
 }
 
-const WS_URL = "ws://localhost:8000/ws/dealer_replies"; // Replace with your backend WS URL
-const API_EMAIL_LOGS_URL = "http://localhost:8000/api/email_logs"; // Replace with your real API URL
+const API_EMAIL_LOGS_URL = "http://localhost:8000/api/email_logs";
 
 const EmailsPage: React.FC = () => {
   const [emailLogs, setEmailLogs] = useState<EmailLog[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'sent' | 'failed' | 'pending'>('all');
-  const wsRef = useRef<WebSocket | null>(null);
+  const [selectedEmail, setSelectedEmail] = useState<EmailLog | null>(null);
 
-  // Fetch initial email logs (sent emails + dealer replies)
+  // Fetch email logs
   useEffect(() => {
     const fetchEmailLogs = async () => {
       setLoading(true);
@@ -31,6 +31,7 @@ const EmailsPage: React.FC = () => {
         const response = await fetch(API_EMAIL_LOGS_URL);
         if (!response.ok) throw new Error("Failed to fetch email logs");
         const data: EmailLog[] = await response.json();
+        console.log("Fetched emails:", data);
         setEmailLogs(data);
       } catch (err) {
         console.error("Error fetching email logs:", err);
@@ -38,54 +39,23 @@ const EmailsPage: React.FC = () => {
         setLoading(false);
       }
     };
+
     fetchEmailLogs();
   }, []);
 
-  // WebSocket for live dealer replies
+  // Detect duplicate IDs and print warning once emailLogs updated
   useEffect(() => {
-    wsRef.current = new WebSocket(WS_URL);
+    const ids = emailLogs.map(log => log.id);
+    const duplicates = ids.filter((id, idx) => ids.indexOf(id) !== idx);
+    if (duplicates.length > 0) {
+      console.warn("Duplicate email log ids found:", duplicates);
+    }
+  }, [emailLogs]);
 
-    wsRef.current.onopen = () => {
-      console.log("WebSocket connected");
-    };
-
-    wsRef.current.onmessage = (event) => {
-      try {
-        const message = JSON.parse(event.data);
-        if (message.type === "dealer_reply") {
-          const newReply: EmailLog = {
-            id: message.id || `reply-${Date.now()}`,
-            from: message.from || "Dealer",
-            subject: message.subject || "Dealer Reply",
-            status: "sent",
-            timestamp: message.timestamp || new Date().toISOString(),
-            body: message.body || JSON.stringify(message.data, null, 2),
-          };
-
-          setEmailLogs(prevLogs => [newReply, ...prevLogs]);
-        }
-      } catch (err) {
-        console.error("WebSocket message error:", err);
-      }
-    };
-
-    wsRef.current.onerror = (err) => {
-      console.error("WebSocket error:", err);
-    };
-
-    wsRef.current.onclose = () => {
-      console.log("WebSocket disconnected");
-    };
-
-    return () => {
-      wsRef.current?.close();
-    };
-  }, []);
-
-  // Resend email handler (you may want to replace with actual API call)
+  // Resend email (dummy logic)
   const handleResendEmail = (emailId: string) => {
-    setEmailLogs(prevLogs =>
-      prevLogs.map(log =>
+    setEmailLogs(prev =>
+      prev.map(log =>
         log.id === emailId
           ? { ...log, status: 'pending', timestamp: new Date().toISOString() }
           : log
@@ -93,8 +63,8 @@ const EmailsPage: React.FC = () => {
     );
 
     setTimeout(() => {
-      setEmailLogs(prevLogs =>
-        prevLogs.map(log =>
+      setEmailLogs(prev =>
+        prev.map(log =>
           log.id === emailId
             ? { ...log, status: 'sent', timestamp: new Date().toISOString() }
             : log
@@ -103,9 +73,14 @@ const EmailsPage: React.FC = () => {
     }, 2000);
   };
 
-  const filteredLogs = emailLogs.filter(log =>
-    filter === 'all' || log.status === filter
-  );
+  // Filter with trimming and case normalization
+  const filteredLogs = emailLogs.filter(log => {
+    if (filter === 'all') return true;
+    return log.status === filter;
+  });
+
+  console.log("Current filter:", filter);
+  console.log("Filtered emails:", filteredLogs);
 
   return (
     <div className="container emails-page">
@@ -138,12 +113,17 @@ const EmailsPage: React.FC = () => {
         </div>
       ) : filteredLogs.length > 0 ? (
         <div className="email-logs-list">
-          {filteredLogs.map(log => (
-            <EmailLogItem
-              key={log.id}
-              log={log}
-              onResend={handleResendEmail}
-            />
+          {filteredLogs.map((log, index) => (
+            <div
+              key={`${log.id}-${index}`}  // Use composite key to ensure uniqueness
+              onClick={() => setSelectedEmail(log)}
+              style={{ cursor: 'pointer' }}
+            >
+              <EmailLogItem
+                log={log}
+                onResend={handleResendEmail}
+              />
+            </div>
           ))}
         </div>
       ) : (
@@ -151,14 +131,18 @@ const EmailsPage: React.FC = () => {
           <Filter size={48} className="no-emails-icon" />
           <p>No emails found matching the selected filter.</p>
           {filter !== 'all' && (
-            <button
-              className="button"
-              onClick={() => setFilter('all')}
-            >
+            <button className="button" onClick={() => setFilter('all')}>
               Show All Emails
             </button>
           )}
         </div>
+      )}
+
+      {selectedEmail && (
+        <EmailDetailsModal
+          email={selectedEmail}
+          onClose={() => setSelectedEmail(null)}
+        />
       )}
     </div>
   );
