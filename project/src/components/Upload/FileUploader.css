@@ -1,0 +1,124 @@
+.file-uploader-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.dropzone {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  background: var(--color-surface);
+}
+
+.dropzone:hover {
+  border-color: var(--color-primary);
+  background: var(--color-surface-variant);
+}
+
+.dropzone.active {
+  border-color: var(--color-primary);
+  background: rgba(125, 211, 252, 0.05);
+}
+
+.dropzone.reject {
+  border-color: var(--color-error);
+  background: rgba(248, 113, 113, 0.05);
+}
+
+.dropzone.has-file {
+  border-color: var(--color-success);
+  background: rgba(74, 222, 128, 0.05);
+}
+
+.dropzone-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.upload-icon-container {
+  position: relative;
+  margin-bottom: var(--space-1);
+}
+
+.upload-icon {
+  color: var(--color-primary);
+  opacity: 0.8;
+}
+
+.file-type-icon {
+  position: absolute;
+  bottom: -5px;
+  right: -10px;
+  color: var(--color-accent);
+  background: var(--color-surface);
+  border-radius: 50%;
+  padding: 3px;
+}
+
+.upload-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--space-1);
+}
+
+.upload-description {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-1);
+}
+
+.upload-browse {
+  color: var(--color-primary);
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.upload-note {
+  font-size: 0.75rem;
+  color: var(--color-text-disabled);
+}
+
+.upload-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--color-error);
+  margin-top: var(--space-2);
+  font-size: 0.875rem;
+}
+
+.selected-file {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2);
+  background: rgba(30, 30, 30, 0.6);
+  border-radius: var(--radius-md);
+}
+
+.file-icon {
+  color: var(--color-primary);
+}
+
+.file-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.file-name {
+  font-weight: 500;
+  word-break: break-all;
+}
+
+.file-size {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}

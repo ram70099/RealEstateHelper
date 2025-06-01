@@ -1,0 +1,163 @@
+.email-log-item {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-2);
+  display: flex;
+  gap: var(--space-2);
+  border-left: 4px solid transparent;
+  transition: all var(--transition-normal);
+  margin-bottom: var(--space-2);
+}
+
+.email-log-item:hover {
+  background: var(--color-surface-variant);
+}
+
+.email-log-item.sent {
+  border-left-color: var(--color-success);
+}
+
+.email-log-item.failed {
+  border-left-color: var(--color-error);
+}
+
+.email-log-item.pending {
+  border-left-color: var(--color-warning);
+}
+
+.email-log-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-1);
+  min-width: 70px;
+}
+
+.status-icon {
+  margin-bottom: 4px;
+}
+
+.status-icon.sent {
+  color: var(--color-success);
+}
+
+.status-icon.failed {
+  color: var(--color-error);
+}
+
+.status-icon.pending {
+  color: var(--color-warning);
+}
+
+.status-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.email-log-item.sent .status-text {
+  color: var(--color-success);
+}
+
+.email-log-item.failed .status-text {
+  color: var(--color-error);
+}
+
+.email-log-item.pending .status-text {
+  color: var(--color-warning);
+}
+
+.email-log-content {
+  flex: 1;
+}
+
+.email-log-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-1);
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.email-addresses {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.email-to, .email-from, .email-subject, .email-property {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.label {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  min-width: 60px;
+}
+
+.value {
+  color: var(--color-text-primary);
+  word-break: break-word;
+}
+
+.email-timestamp {
+  font-size: 0.75rem;
+  color: var(--color-text-disabled);
+}
+
+.email-subject {
+  margin-bottom: 0.5rem;
+}
+
+.email-property .value {
+  font-weight: 500;
+}
+
+.resend-button {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  align-self: flex-start;
+}
+
+.resend-button:hover {
+  background: rgba(125, 211, 252, 0.1);
+}
+
+@media (max-width: 768px) {
+  .email-log-item {
+    flex-direction: column;
+  }
+  
+  .email-log-status {
+    flex-direction: row;
+    justify-content: flex-start;
+    min-width: auto;
+    gap: 0.5rem;
+    padding: 0;
+  }
+  
+  .status-icon {
+    margin-bottom: 0;
+  }
+  
+  .email-log-header {
+    flex-direction: column;
+  }
+  
+  .email-timestamp {
+    margin-top: 0.25rem;
+  }
+}

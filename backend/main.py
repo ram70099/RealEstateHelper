@@ -1,182 +1,183 @@
 import os
-import fitz  # PyMuPDF
 import tempfile
 import json
-import re
-from uuid import uuid4
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from azure.core.credentials import AzureKeyCredential
-from autogen_agentchat.agents import AssistantAgent
-from autogen_ext.models.azure import AzureAIChatCompletionClient
-from autogen_agentchat.base import TaskResult
+from extraction.pdf_utils import extract_pdf_text, extract_property_images_from_pdf
+from extraction.ai_extractor import run_property_extraction
+from utils import logger, send_email, load_json, save_json, compare_property_data
+from models import PropertyResponse
 from dotenv import load_dotenv
-
-# Create static image directory if it doesn't exist
-STATIC_IMAGE_DIR = "static"
-os.makedirs(STATIC_IMAGE_DIR, exist_ok=True)
+from ws_manager import manager
+import asyncio
+from datetime import datetime
 
 load_dotenv()
 
+STATIC_IMAGE_DIR = "static"
+os.makedirs(STATIC_IMAGE_DIR, exist_ok=True)
+
+EMAIL_LOG_FILE = "data/email_logs.json"
+REPLY_LOG_FILE = "data/reply_logs.json"
+os.makedirs("data", exist_ok=True)
+
+# Initialize empty JSON files if not exists
+for path in [EMAIL_LOG_FILE, REPLY_LOG_FILE]:
+    if not os.path.exists(path):
+        with open(path, "w") as f:
+            json.dump([], f)
+
 app = FastAPI()
 
-# Enable CORS (adjust origins in production!)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # TODO: restrict in production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Serve extracted images from static directory
 app.mount("/images", StaticFiles(directory=STATIC_IMAGE_DIR), name="images")
 
-# Azure AI client setup
-AZURE_ENDPOINT = "https://models.inference.ai.azure.com"
-AZURE_TOKEN = os.getenv("GITHUB_TOKEN")
-if not AZURE_TOKEN:
-    raise EnvironmentError("GITHUB_TOKEN not set in .env file.")
+async def get_new_dealer_replies_somehow():
+    # For demo/testing: simulate a dealer reply every poll
+    from random import randint
+    import time
+    # This simulates one new reply randomly
+    if randint(0, 1) == 1:
+        return [{
+            "id": f"reply-{int(time.time() * 1000)}",
+            "from": "dealer@example.com",
+            "subject": "Re: Interest in Property",
+            "body": "This property is still available. Price increased by 5%.",
+            "timestamp": datetime.utcnow().isoformat()
+        }]
+    return []
 
-client = AzureAIChatCompletionClient(
-    model="gpt-4o-mini",
-    endpoint=AZURE_ENDPOINT,
-    credential=AzureKeyCredential(AZURE_TOKEN),
-    model_info={
-        "json_output": True,
-        "function_calling": True,
-        "vision": True,
-        "family": "unknown",
-    },
-)
+# Helpers for email and reply logs
+async def add_sent_email_log(email_id, to_email, subject, body, status="sent"):
+    logs = load_json(EMAIL_LOG_FILE)
+    logs.append({
+        "id": email_id,
+        "from": "Agent",
+        "to": to_email,
+        "subject": subject,
+        "body": body,
+        "status": status,
+        "timestamp": datetime.utcnow().isoformat()
+    })
+    save_json(EMAIL_LOG_FILE, logs)
 
-# Agent prompt setup
-property_extractor = AssistantAgent(
-    "property_extractor",
-    model_client=client,
-    system_message="""
-You are a real estate data extractor. Given text from a commercial property listing document, extract structured JSON:
-- title
-- address
-- submarket
-- property_type
-- built_year
-- size_sf
-- available_sf
-- rent
-- status
-- brokers (list of name + phone)
-- notes
+async def add_dealer_reply_log(reply_id, from_email, subject, body, timestamp=None):
+    logs = load_json(REPLY_LOG_FILE)
+    logs.append({
+        "id": reply_id,
+        "from": from_email,
+        "to": "Agent",
+        "subject": subject,
+        "body": body,
+        "status": "replied",
+        "timestamp": timestamp or datetime.utcnow().isoformat()
+    })
+    save_json(REPLY_LOG_FILE, logs)
 
-Return an array of JSON objects. Only return valid JSON.
-""",
-)
-
-
-def extract_pdf_text(file_path: str) -> str:
-    doc = fitz.open(file_path)
-    return "".join([page.get_text() for page in doc])
-
-
-def extract_property_images_from_pdf(
-    file_path: str,
-    min_width=300,
-    min_height=200,
-    min_filesize=10 * 1024,
-    min_aspect_ratio=1.0,
-    max_aspect_ratio=4.0,
-):
-    doc = fitz.open(file_path)
-    property_images = []
-    for page_num in range(len(doc)):
-        for img_index, img in enumerate(doc[page_num].get_images(full=True)):
-            xref = img[0]
-            base_image = doc.extract_image(xref)
-            width = base_image.get("width", 0)
-            height = base_image.get("height", 0)
-            image_bytes = base_image["image"]
-            filesize = len(image_bytes)
-            ext = base_image["ext"]
-
-            aspect_ratio = width / height if height > 0 else 0
-
-            if (
-                width >= min_width
-                and height >= min_height
-                and filesize >= min_filesize
-                and min_aspect_ratio <= aspect_ratio <= max_aspect_ratio
-            ):
-                filename = f"{uuid4().hex}_p{page_num + 1}.{ext}"
-                filepath = os.path.join(STATIC_IMAGE_DIR, filename)
-                with open(filepath, "wb") as f:
-                    f.write(image_bytes)
-                property_images.append({
-                    "page": page_num + 1,
-                    "filename": filename,
-                    "filepath": filepath,
-                    "size": filesize,
-                    "width": width,
-                    "height": height,
-                    "url": f"/images/{filename}"
-                })
-
-    # Sort: first by page, then largest images on that page
-    property_images.sort(key=lambda x: (x["page"], -x["size"]))
-    return property_images
-
-
-async def run_property_extraction(text: str):
-    result = None
-    async for message in property_extractor.run_stream(task=text):
-        if isinstance(message, TaskResult):
-            break
-        else:
-            try:
-                # Clean out ```json ... ``` if present
-                cleaned = re.sub(r"^```json\s*|\s*```$", "", message.content.strip(), flags=re.DOTALL)
-                result = json.loads(cleaned)
-            except Exception as e:
-                result = {
-                    "error": "JSON parse error",
-                    "details": str(e),
-                    "raw": message.content
-                }
-    return result
-
-
-@app.post("/extract_data")
+@app.post("/extract_data", response_model=PropertyResponse)
 async def extract_data(pdf: UploadFile = File(...)):
     if pdf.content_type != "application/pdf":
         raise HTTPException(status_code=400, detail="File must be a PDF")
 
     tmp_path = None
     try:
-        # Save file temporarily
         with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
             tmp_path = tmp.name
-            content = await pdf.read()
-            tmp.write(content)
+            tmp.write(await pdf.read())
 
-        # Extract data
+        logger.info(f"PDF saved to: {tmp_path}")
+
         pdf_text = extract_pdf_text(tmp_path)
-        images = extract_property_images_from_pdf(tmp_path)
+        images = extract_property_images_from_pdf(tmp_path, STATIC_IMAGE_DIR)
         result = await run_property_extraction(pdf_text)
+        fallback_email = os.getenv("FALLBACK_EMAIL", "fallback@example.com")
 
-        # Attach images to extracted properties
         if isinstance(result, list):
             for i, prop in enumerate(result):
+                prop["id"] = str(i + 1)
                 prop["image_url"] = images[i]["url"] if i < len(images) else None
-            if len(result) != len(images):
-                print(f"⚠️ Mismatch: {len(result)} properties vs {len(images)} images.")
-        else:
-            print("⚠️ Extraction result is not a list:", result)
+                dealer_email = prop.get("dealer_email", fallback_email)
+
+                subject = f"Interest in Property: {prop.get('title', 'N/A')}"
+                body = f"""Dear Dealer,
+
+We are interested in the following property:
+
+Title: {prop.get('title', 'N/A')}
+Location: {prop.get('location', 'N/A')}
+OPD Price: ₹{prop.get('price', 'N/A')}
+
+Please share your best price or offer details.
+
+Regards,
+Real Estate Agent Bot
+"""
+
+                try:
+                    send_email(dealer_email, subject, body)
+                    prop["email_sent"] = True
+                    prop["email_error"] = None
+                    await add_sent_email_log(prop["id"], dealer_email, subject, body)
+                except Exception as e:
+                    logger.error(f"Email failed: {e}")
+                    prop["email_sent"] = False
+                    prop["email_error"] = str(e)
+                    await add_sent_email_log(prop["id"], dealer_email, subject, body, status="failed")
 
         return {"status": "success", "data": result}
-
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
 
     finally:
         if tmp_path and os.path.exists(tmp_path):
             os.remove(tmp_path)
+
+@app.get("/api/email_logs")
+async def get_email_logs():
+    return load_json(EMAIL_LOG_FILE)
+
+@app.get("/api/reply_logs")
+async def get_reply_logs():
+    return load_json(REPLY_LOG_FILE)
+
+@app.websocket("/ws/dealer_replies")
+async def websocket_endpoint(websocket: WebSocket):
+    await manager.connect(websocket)
+    try:
+        while True:
+            await websocket.receive_text()
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
+
+async def poll_dealer_replies():
+    while True:
+        try:
+            new_replies = await get_new_dealer_replies_somehow()
+            email_logs = load_json(EMAIL_LOG_FILE)
+
+            for reply in new_replies:
+                await add_dealer_reply_log(reply["id"], reply["from"], reply["subject"], reply["body"], reply["timestamp"])
+
+                # Compare reply with original sent data
+                sent_email = next((e for e in email_logs if e["to"] == reply["from"]), None)
+                if sent_email:
+                    comparison = compare_property_data(sent_email["body"], reply["body"])
+                    await manager.broadcast({
+                        "type": "dealer_reply",
+                        "reply": reply,
+                        "analysis": comparison
+                    })
+        except Exception as e:
+            logger.error(f"Polling error: {e}")
+
+        await asyncio.sleep(15)
+
+@app.on_event("startup")
+async def startup_event():
+    asyncio.create_task(poll_dealer_replies())

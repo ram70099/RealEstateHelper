@@ -1,0 +1,83 @@
+[
+  {
+    "id": "reply-1748768992395",
+    "from": "dealer@example.com",
+    "to": "Agent",
+    "subject": "Re: Interest in Property",
+    "body": "This property is still available. Price increased by 5%.",
+    "status": "replied",
+    "timestamp": "2025-06-01T09:09:52.395375"
+  },
+  {
+    "id": "reply-1748769090799",
+    "from": "dealer@example.com",
+    "to": "Agent",
+    "subject": "Re: Interest in Property",
+    "body": "This property is still available. Price increased by 5%.",
+    "status": "replied",
+    "timestamp": "2025-06-01T09:11:30.799780"
+  },
+  {
+    "id": "reply-1748769135876",
+    "from": "dealer@example.com",
+    "to": "Agent",
+    "subject": "Re: Interest in Property",
+    "body": "This property is still available. Price increased by 5%.",
+    "status": "replied",
+    "timestamp": "2025-06-01T09:12:15.876504"
+  },
+  {
+    "id": "reply-1748769150889",
+    "from": "dealer@example.com",
+    "to": "Agent",
+    "subject": "Re: Interest in Property",
+    "body": "This property is still available. Price increased by 5%.",
+    "status": "replied",
+    "timestamp": "2025-06-01T09:12:30.889121"
+  },
+  {
+    "id": "reply-1748769165900",
+    "from": "dealer@example.com",
+    "to": "Agent",
+    "subject": "Re: Interest in Property",
+    "body": "This property is still available. Price increased by 5%.",
+    "status": "replied",
+    "timestamp": "2025-06-01T09:12:45.900554"
+  },
+  {
+    "id": "reply-1748769228267",
+    "from": "dealer@example.com",
+    "to": "Agent",
+    "subject": "Re: Interest in Property",
+    "body": "This property is still available. Price increased by 5%.",
+    "status": "replied",
+    "timestamp": "2025-06-01T09:13:48.267519"
+  },
+  {
+    "id": "reply-1748774044847",
+    "from": "dealer@example.com",
+    "to": "Agent",
+    "subject": "Re: Interest in Property",
+    "body": "This property is still available. Price increased by 5%.",
+    "status": "replied",
+    "timestamp": "2025-06-01T10:34:04.847259"
+  },
+  {
+    "id": "reply-1748774059857",
+    "from": "dealer@example.com",
+    "to": "Agent",
+    "subject": "Re: Interest in Property",
+    "body": "This property is still available. Price increased by 5%.",
+    "status": "replied",
+    "timestamp": "2025-06-01T10:34:19.857969"
+  },
+  {
+    "id": "reply-1748774089912",
+    "from": "dealer@example.com",
+    "to": "Agent",
+    "subject": "Re: Interest in Property",
+    "body": "This property is still available. Price increased by 5%.",
+    "status": "replied",
+    "timestamp": "2025-06-01T10:34:49.912298"
+  }
+]

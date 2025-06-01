@@ -1,0 +1,84 @@
+.emails-page {
+  padding-bottom: var(--space-4);
+}
+
+.emails-header {
+  margin-bottom: var(--space-4);
+}
+
+.emails-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-bottom: var(--space-1);
+}
+
+.emails-title svg {
+  color: var(--color-primary);
+}
+
+.emails-subheader {
+  color: var(--color-text-secondary);
+}
+
+.emails-filters {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-2);
+  overflow-x: auto;
+}
+
+.filter-button {
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-weight: 500;
+}
+
+.filter-button:hover {
+  color: var(--color-text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.filter-button.active {
+  background: var(--color-primary);
+  color: #121212;
+}
+
+.email-logs-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.no-emails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-6) 0;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.no-emails-icon {
+  color: var(--color-text-disabled);
+  margin-bottom: var(--space-2);
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  gap: var(--space-2);
+  color: var(--color-text-secondary);
+}

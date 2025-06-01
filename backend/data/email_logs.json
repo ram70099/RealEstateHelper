@@ -1,0 +1,101 @@
+[
+  {
+    "id": "1",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 3901 Capitol St - Ironworks Campus",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 3901 Capitol St - Ironworks Campus\nLocation: N/A\nOPD Price: \u20b9N/A\n\nPlease share your best price or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T09:10:47.551550"
+  },
+  {
+    "id": "2",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 2501 Commerce",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 2501 Commerce\nLocation: N/A\nOPD Price: \u20b9N/A\n\nPlease share your best price or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T09:10:53.140198"
+  },
+  {
+    "id": "3",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 100 Jensen Dr - East River Three",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 100 Jensen Dr - East River Three\nLocation: N/A\nOPD Price: \u20b9N/A\n\nPlease share your best price or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T09:10:59.225423"
+  },
+  {
+    "id": "4",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 2600 Commerce St - 2600 Commerce",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 2600 Commerce St - 2600 Commerce\nLocation: N/A\nOPD Price: \u20b9N/A\n\nPlease share your best price or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T09:11:04.934095"
+  },
+  {
+    "id": "5",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 3302 Canal St - The Plant Second Ward",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 3302 Canal St - The Plant Second Ward\nLocation: N/A\nOPD Price: \u20b9N/A\n\nPlease share your best price or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T09:11:11.028854"
+  },
+  {
+    "id": "6",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 1005 Hutchins St - East Blocks",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 1005 Hutchins St - East Blocks\nLocation: N/A\nOPD Price: \u20b9N/A\n\nPlease share your best price or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T09:11:16.859747"
+  },
+  {
+    "id": "7",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 908 Live Oak St - Building 7",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 908 Live Oak St - Building 7\nLocation: N/A\nOPD Price: \u20b9N/A\n\nPlease share your best price or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T09:11:23.019096"
+  },
+  {
+    "id": "8",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nLocation: N/A\nOPD Price: \u20b9N/A\n\nPlease share your best price or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T09:11:30.778855"
+  },
+  {
+    "id": "1",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 3901 Capitol St - Ironworks Campus",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 3901 Capitol St - Ironworks Campus\nLocation: N/A\nOPD Price: \u20b9N/A\n\nPlease share your best price or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T09:14:22.117910"
+  },
+  {
+    "id": "2",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 2501 Commerce",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 2501 Commerce\nLocation: N/A\nOPD Price: \u20b9N/A\n\nPlease share your best price or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-01T09:14:29.010846"
+  },
+  {
+    "id": "3",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 100 Jensen Dr - East River Three",
+    "body": "Dear Dealer,\n\nWe are interested in the following property:\n\nTitle: 100 Jensen Dr - East River Three\nLocation: N/A\nOPD Price: \u20b9N/A\n\nPlease share your best price or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "failed",
+    "timestamp": "2025-06-01T09:14:50.191152"
+  }
+]

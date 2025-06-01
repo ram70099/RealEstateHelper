@@ -8,6 +8,7 @@ import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home/Home';
 import Upload from './pages/Upload/Upload';
 import Analysis from './pages/Analysis/Analysis';
+import PropertyDetail from './pages/Analysis/PropertyDetail';
 import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
@@ -29,6 +30,7 @@ function App() {
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
+          <Route path="/property/:id" element={<PropertyDetail />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/analysis" element={<Analysis />} />
           <Route path="/dashboard" element={<Dashboard />} />
