@@ -1,5 +1,5 @@
-from pydantic import BaseModel
 from typing import List, Optional
+from pydantic import BaseModel
 
 class Broker(BaseModel):
     name: str
@@ -11,20 +11,18 @@ class Property(BaseModel):
     address: str
     submarket: str
     property_type: str
-    built_year: Optional[int]
+    built_year: Optional[int] = None  # Made optional
     size_sf: int
-    available_sf: str
+    available_sf: str  # must be string
     rent: str
     status: str
     brokers: List[Broker]
-    notes: Optional[str]
-    image_url: str
-    email_sent: bool
-    email_error: Optional[str]
-    location: str          # <--- Required field causing the error
-    price: str             # <--- Required field causing the error
+    notes: Optional[str] = None
+    image_url: Optional[str] = None
+    email_sent: bool = False
+    email_error: Optional[str] = None
 
-class ExtractDataResponse(BaseModel):
+class ExtractedDataResponse(BaseModel):
     data: List[Property]
 
 
