@@ -1,6 +1,7 @@
 import fitz  # PyMuPDF
 from uuid import uuid4
 from typing import List, Dict
+import os
 
 def extract_pdf_text(file_path: str) -> str:
     doc = fitz.open(file_path)
@@ -15,6 +16,12 @@ def extract_property_images_from_pdf(
     min_aspect_ratio=1.0,
     max_aspect_ratio=4.0,
 ) -> List[Dict]:
+    """
+    Extract images from PDF that match criteria,
+    save them to static_dir and return metadata list.
+    """
+    os.makedirs(static_dir, exist_ok=True)
+
     doc = fitz.open(file_path)
     property_images = []
 
@@ -37,7 +44,7 @@ def extract_property_images_from_pdf(
                 and min_aspect_ratio <= aspect_ratio <= max_aspect_ratio
             ):
                 filename = f"{uuid4().hex}_p{page_num + 1}.{ext}"
-                filepath = f"{static_dir}/{filename}"
+                filepath = os.path.join(static_dir, filename)
                 with open(filepath, "wb") as f:
                     f.write(image_bytes)
 
@@ -48,6 +55,7 @@ def extract_property_images_from_pdf(
                     "size": filesize,
                     "width": width,
                     "height": height,
+                    "aspect_ratio": aspect_ratio,
                     "url": f"/images/{filename}",
                 })
 

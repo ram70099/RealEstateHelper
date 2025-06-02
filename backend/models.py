@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 from pydantic import BaseModel
 
 class Broker(BaseModel):
@@ -11,7 +11,7 @@ class Property(BaseModel):
     address: str
     submarket: str
     property_type: str
-    built_year: Optional[int] = None  # Made optional
+    built_year: Optional[Union[int, str]] = None  # accept int or string here
     size_sf: int
     available_sf: str  # must be string
     rent: str
@@ -24,7 +24,6 @@ class Property(BaseModel):
 
 class ExtractedDataResponse(BaseModel):
     data: List[Property]
-
 
 class PropertyResponse(BaseModel):
     status: str

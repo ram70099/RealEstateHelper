@@ -5,7 +5,6 @@ from email.mime.multipart import MIMEMultipart
 import os
 import json
 
-# Logger setup
 logger = logging.getLogger("realestate-helper")
 logger.setLevel(logging.INFO)
 handler = logging.StreamHandler()
@@ -41,14 +40,3 @@ def load_json(filepath, default=None):
 def save_json(filepath, data):
     with open(filepath, "w") as f:
         json.dump(data, f, indent=2)
-
-def compare_property_data(sent_body, reply_body):
-    # Basic heuristic: check if reply mentions price change or availability
-    reply_lower = reply_body.lower()
-    result = {
-        "availability": "available" in reply_lower or "still available" in reply_lower,
-        "price_increased": "increase" in reply_lower or "higher" in reply_lower,
-        "price_decreased": "decrease" in reply_lower or "lower" in reply_lower,
-        "other_comments": reply_body
-    }
-    return result

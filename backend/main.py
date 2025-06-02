@@ -30,7 +30,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Consider restricting in production
+    allow_origins=["*"],  # Restrict this in production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -46,9 +46,6 @@ async def add_sent_email_log(
     body: str,
     status: str = "sent"
 ) -> None:
-    """
-    Append a log entry about sent or failed email asynchronously.
-    """
     logs = load_json(EMAIL_LOG_FILE)
     logs.append({
         "id": email_id,
@@ -59,24 +56,22 @@ async def add_sent_email_log(
         "status": status,
         "timestamp": datetime.utcnow().isoformat()
     })
-    # Write updated logs asynchronously
     async with aiofiles.open(EMAIL_LOG_FILE, "w") as f:
         await f.write(json.dumps(logs, indent=2))
 
 
 async def send_property_email(
     prop: dict,
+    broker: dict,
     fallback_email: str,
     image_url: Optional[str] = None
 ) -> None:
-    """
-    Compose and send an email about a property asynchronously.
-    If dealer email missing, use fallback_email.
-    Log success or failure.
-    """
-    dealer_email = prop.get("dealer_email") or fallback_email
+    broker_name = broker.get("name", "Dealer")
+    broker_email = broker.get("email")  # Make sure your extraction has emails!
+    to_email = broker_email if broker_email else fallback_email
+
     subject = f"Interest in Property: {prop.get('title', 'N/A')}"
-    body = f"""Dear Dealer,
+    body = f"""Dear {broker_name},
 
 We are interested in the following property:
 
@@ -91,17 +86,12 @@ Real Estate Agent Bot
 """
 
     try:
-        # Run synchronous send_email in thread to avoid blocking
-        await asyncio.to_thread(send_email, dealer_email, subject, body)
-        prop["email_sent"] = True
-        prop["email_error"] = None
-        await add_sent_email_log(prop["id"], dealer_email, subject, body)
-        logger.info(f"Email sent successfully to {dealer_email} for property {prop['id']}")
+        await asyncio.to_thread(send_email, to_email, subject, body)
+        await add_sent_email_log(prop["id"], to_email, subject, body)
+        logger.info(f"Email sent successfully to {to_email} for property {prop['id']}, broker {broker_name}")
     except Exception as e:
-        logger.error(f"Email failed to {dealer_email} for property {prop['id']}: {e}")
-        prop["email_sent"] = False
-        prop["email_error"] = str(e)
-        await add_sent_email_log(prop["id"], dealer_email, subject, body, status="failed")
+        logger.error(f"Email failed to {to_email} for property {prop['id']}, broker {broker_name}: {e}")
+        await add_sent_email_log(prop["id"], to_email, subject, body, status="failed")
 
 
 @app.post("/extract_data", response_model=PropertyResponse)
@@ -111,51 +101,44 @@ async def extract_data(pdf: UploadFile = File(...)):
 
     tmp_path = None
     try:
-        # Save uploaded file to temp path
         with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
             tmp_path = tmp.name
             content = await pdf.read()
             tmp.write(content)
 
-        # Extract text and images from PDF
         pdf_text = extract_pdf_text(tmp_path)
         images = extract_property_images_from_pdf(tmp_path, STATIC_IMAGE_DIR)
 
-        # Extract properties asynchronously using your AI extractor
         result = await run_property_extraction(pdf_text)
 
-        fallback_email = os.getenv("FALLBACK_EMAIL", "fallback@example.com")
+        fallback_email = os.getenv("FALLBACK_EMAIL", "shah70099053@gmail.com")
 
         if isinstance(result, list):
             tasks = []
             for i, prop in enumerate(result):
                 prop["id"] = str(i + 1)
                 prop["image_url"] = images[i]["url"] if i < len(images) else None
-                # Convert available_sf to string to match schema
+
                 if "available_sf" in prop:
                     prop["available_sf"] = str(prop["available_sf"])
-                # Rename keys if they exist (optional here)
-                if "address" in prop:
-                    prop["address"] = prop.pop("address")
-                if "rent" in prop:
-                    prop["rent"] = prop.pop("rent")
 
-                tasks.append(send_property_email(prop, fallback_email, prop["image_url"]))
+                brokers = prop.get("brokers", [])
+                if brokers:
+                    for broker in brokers:
+                        tasks.append(send_property_email(prop, broker, fallback_email, prop["image_url"]))
+                else:
+                    # No brokers - send to fallback email once
+                    tasks.append(send_property_email(prop, {}, fallback_email, prop["image_url"]))
 
-            # Run all email sends concurrently
             await asyncio.gather(*tasks)
 
         return {"status": "success", "data": result}
 
     finally:
-        # Clean up temp file safely
         if tmp_path and os.path.exists(tmp_path):
             os.remove(tmp_path)
 
 
 @app.get("/api/email_logs")
 async def get_email_logs():
-    """
-    Returns the email logs from the JSON file.
-    """
     return load_json(EMAIL_LOG_FILE)
