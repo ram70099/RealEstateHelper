@@ -1,57 +1,12 @@
 [
   {
-    "id": "3",
-    "from": "Agent",
-    "to": "shah70099053@gmail.com",
-    "subject": "Interest in Property: 100 Jensen Dr - East River Three",
-    "body": "Dear Amanda Nebel,\n\nWe are interested in the following property:\n\nTitle: 100 Jensen Dr - East River Three\nAddress: 100 Jensen Dr, Houston, Texas 77020\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
-    "status": "sent",
-    "timestamp": "2025-06-02T08:07:39.213508"
-  },
-  {
-    "id": "2",
-    "from": "Agent",
-    "to": "shah70099053@gmail.com",
-    "subject": "Interest in Property: 2501 Commerce",
-    "body": "Dear Arlette Molina,\n\nWe are interested in the following property:\n\nTitle: 2501 Commerce\nAddress: 2501 Commerce, Houston, Texas 77003\nRent: \u20b9$19.00 SF/year/NNN\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
-    "status": "sent",
-    "timestamp": "2025-06-02T08:07:39.426905"
-  },
-  {
-    "id": "6",
-    "from": "Agent",
-    "to": "shah70099053@gmail.com",
-    "subject": "Interest in Property: 1005 Hutchins St - East Blocks",
-    "body": "Dear Ryan Barbles,\n\nWe are interested in the following property:\n\nTitle: 1005 Hutchins St - East Blocks\nAddress: 1005 Hutchins St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
-    "status": "sent",
-    "timestamp": "2025-06-02T08:07:39.914982"
-  },
-  {
-    "id": "6",
-    "from": "Agent",
-    "to": "shah70099053@gmail.com",
-    "subject": "Interest in Property: 1005 Hutchins St - East Blocks",
-    "body": "Dear Matthew Asvestas,\n\nWe are interested in the following property:\n\nTitle: 1005 Hutchins St - East Blocks\nAddress: 1005 Hutchins St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
-    "status": "sent",
-    "timestamp": "2025-06-02T08:07:40.220679"
-  },
-  {
     "id": "7",
     "from": "Agent",
     "to": "shah70099053@gmail.com",
     "subject": "Interest in Property: 908 Live Oak St - Building 7",
     "body": "Dear Ryan Barbles,\n\nWe are interested in the following property:\n\nTitle: 908 Live Oak St - Building 7\nAddress: 908 Live Oak St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-02T08:07:40.502897"
-  },
-  {
-    "id": "8",
-    "from": "Agent",
-    "to": "shah70099053@gmail.com",
-    "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
-    "body": "Dear Robert LaCoure,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
-    "status": "sent",
-    "timestamp": "2025-06-02T08:07:41.029563"
+    "timestamp": "2025-06-02T13:12:36.584585"
   },
   {
     "id": "7",
@@ -60,7 +15,16 @@
     "subject": "Interest in Property: 908 Live Oak St - Building 7",
     "body": "Dear Matthew Asvestas,\n\nWe are interested in the following property:\n\nTitle: 908 Live Oak St - Building 7\nAddress: 908 Live Oak St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-02T08:07:41.291089"
+    "timestamp": "2025-06-02T13:12:37.113128"
+  },
+  {
+    "id": "8",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
+    "body": "Dear Robert LaCoure,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-02T13:12:37.878803"
   },
   {
     "id": "8",
@@ -69,7 +33,7 @@
     "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
     "body": "Dear Jill Nesloney,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-02T08:07:41.552205"
+    "timestamp": "2025-06-02T13:12:38.172932"
   },
   {
     "id": "8",
@@ -78,7 +42,7 @@
     "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
     "body": "Dear Mike Pittman,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-02T08:07:42.034435"
+    "timestamp": "2025-06-02T13:12:38.921047"
   },
   {
     "id": "8",
@@ -87,7 +51,7 @@
     "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
     "body": "Dear Bryce Adams,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-02T08:07:42.309210"
+    "timestamp": "2025-06-02T13:12:39.441573"
   },
   {
     "id": "8",
@@ -96,6 +60,6 @@
     "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
     "body": "Dear Michael Burgower,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-02T08:07:42.613999"
+    "timestamp": "2025-06-02T13:12:40.281019"
   }
 ]

@@ -36,7 +36,7 @@ const PropertyDetailsContent: React.FC<Props> = ({
   setActiveTab,
   onEmailSent,
 }) => {
-  const [showEmailForm, setShowEmailForm] = useState(false);
+  const [showEmailForm, setShowEmailForm] = useState(true);
   const [message, setMessage] = useState('');
   const [emailSent, setEmailSent] = useState(false);
 
@@ -221,12 +221,12 @@ const PropertyDetailsContent: React.FC<Props> = ({
                             </div>
                           )}
                         </div>
-                        {/* {index === 0 && (
+                        {index === 0 && (
                           <button className="contact-button primary-contact" onClick={handleContactBroker}>
                             <Send size={16} />
                             Contact Primary Broker
                           </button>
-                        )} */}
+                        )}
                         
                       </div>
                     ))

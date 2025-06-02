@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Calendar, Download } from 'lucide-react';
+import { ArrowLeft, Download, RefreshCcw } from 'lucide-react';
 import { motion } from 'framer-motion';
 import LoadingSpinner from '../components/common/LoadingSpinner';
-import PropertyDetailsContent from './PropertyDetailsContent';
+import SectionHeader from './sections/SectionHeader';
+import OverviewSection from './sections/OverviewSection';
 import './PropertyDetailsPage.css';
 
 type Broker = {
@@ -20,6 +21,11 @@ type Property = {
   address: string;
   rent: string;
   status: string;
+  property_type: string;
+  submarket: string;
+  available_sf: number;
+  size_sf: number;
+  built_year: number;
   brokers: Broker[];
   email_sent: boolean;
   email_error: string | null;
@@ -42,7 +48,7 @@ const PropertyDetailsPage: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [property, setProperty] = useState<Property | null>(null);
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeSection, setActiveSection] = useState('overview');
   const [propertyEmails, setPropertyEmails] = useState<EmailLog[]>([]);
 
   useEffect(() => {
@@ -91,7 +97,7 @@ const PropertyDetailsPage: React.FC = () => {
     fetchPropertyAndEmails();
   }, [id, navigate]);
 
-  // Update property email_sent flag & persist in localStorage (same as before)
+  // Update property email_sent flag & persist in localStorage
   const updateEmailSent = () => {
     if (!property) return;
 
@@ -122,6 +128,31 @@ const PropertyDetailsPage: React.FC = () => {
     );
   }
 
+  const renderActiveSection = () => {
+    switch (activeSection) {
+      case 'overview':
+        return (
+          <OverviewSection 
+            property={property!} 
+            propertyEmails={propertyEmails}
+            onEmailSent={updateEmailSent}
+          />
+        );
+      case 'communication':
+        return <div className="section-placeholder">Communication section coming soon...</div>;
+      case 'suggestions':
+        return <div className="section-placeholder">Agent suggestions section coming soon...</div>;
+      default:
+        return (
+          <OverviewSection 
+            property={property!} 
+            propertyEmails={propertyEmails}
+            onEmailSent={updateEmailSent}
+          />
+        );
+    }
+  };
+
   return (
     <motion.div
       className="property-dashboard container"
@@ -140,24 +171,32 @@ const PropertyDetailsPage: React.FC = () => {
         </button>
 
         <div className="header-actions">
-          <button className="action-button">
-            <Download size={18} />
-            Export Details
+          <button className="back-button">
+            <RefreshCcw size={18} />
+            Fetch Latest Data
           </button>
-         
         </div>
       </div>
 
       {property && (
-        <PropertyDetailsContent
-          property={property}
-          propertyEmails={propertyEmails}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          onEmailSent={updateEmailSent}
-        />
+        <>
+          <SectionHeader 
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+          />
+          
+          <motion.div
+            key={activeSection}
+            className="section-content"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            {renderActiveSection()}
+          </motion.div>
+        </>
       )}
-
     </motion.div>
   );
 };
