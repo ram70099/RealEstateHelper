@@ -602,6 +602,7 @@
   cursor: pointer;
   transition: all var(--transition-normal);
   box-shadow: var(--shadow-md);
+  position: relative;
 }
 
 .contact-cta-button:hover {

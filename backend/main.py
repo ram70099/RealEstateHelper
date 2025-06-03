@@ -4,10 +4,12 @@ import json
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from dealer_reply_ai import analyze_dealer_replies
 from extraction.pdf_utils import extract_pdf_text, extract_property_images_from_pdf
 from extraction.ai_extractor import run_property_extraction
 from utils import logger, send_email, load_json, save_json
 from models import PropertyResponse
+from models import ContactBrokerRequest
 from dotenv import load_dotenv
 from datetime import datetime
 import aiofiles
@@ -142,3 +144,41 @@ async def extract_data(pdf: UploadFile = File(...)):
 @app.get("/api/email_logs")
 async def get_email_logs():
     return load_json(EMAIL_LOG_FILE)
+
+@app.post("/api/contact-broker")
+async def contact_broker(data: ContactBrokerRequest):
+    try:
+        fallback_email = os.getenv("FALLBACK_EMAIL", "shah70099053@gmail.com")
+        email_id = f"manual-{datetime.utcnow().timestamp()}"
+        subject = f"Message Regarding Property: {data.propertyTitle}"
+        body = f"""Dear {data.brokerName},
+
+You have received a new message regarding the property "{data.propertyTitle}".
+
+Message:
+{data.message}
+
+Regards,
+Real Estate Contact Bot
+"""
+
+        # Actually send the email
+        await asyncio.to_thread(send_email, fallback_email, subject, body)
+
+        # Log the email
+        await add_sent_email_log(
+            email_id=email_id,
+            to_email=fallback_email,
+            subject=subject,
+            body=data.message,
+        )
+
+        return {"message": f"Message successfully sent to {data.brokerName}"}
+
+    except Exception as e:
+        logger.error(f"Failed to send contact message to {data.brokerEmail}: {e}")
+        raise HTTPException(status_code=500, detail="Failed to send message. Please try again.")
+    
+@app.get("/api/analyze-dealer-replies")
+async def api_analyze_dealer_replies():
+    return await analyze_dealer_replies()

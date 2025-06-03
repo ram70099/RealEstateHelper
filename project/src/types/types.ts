@@ -6,6 +6,7 @@ export type Broker = {
   email: string; // Required everywhere, no undefined allowed
 };
 
+
 export type Property = {
   id: string;
   title: string;

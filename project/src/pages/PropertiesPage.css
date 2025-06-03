@@ -74,8 +74,35 @@
 
 .properties-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: var(--space-3);
+  align-items: start;
+}
+
+.property-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.property-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.property-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.property-link:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 .loading-container {
@@ -101,5 +128,9 @@
   
   .properties-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .search-container {
+    min-width: auto;
   }
 }

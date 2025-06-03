@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
-import { Link } from 'react-router-dom';  // <-- import Link
+import { Link } from 'react-router-dom';
 import PropertyCard from '../components/PropertyCard/PropertyCard';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import './PropertiesPage.css';
@@ -49,7 +49,6 @@ const PropertiesPage: React.FC = () => {
       const dataString = localStorage.getItem('propertyData');
       if (dataString) {
         const data: Property[] = JSON.parse(dataString);
-        // Assume backend already provides "id" and "image_url"
         const dataWithNormalizedStatus = data.map(prop => ({
           ...prop,
           status: normalizeStatus(prop.status),
@@ -130,16 +129,17 @@ const PropertiesPage: React.FC = () => {
       ) : filteredProperties.length > 0 ? (
         <div className="properties-grid">
           {filteredProperties.map(property => (
-            <Link
-              key={property.id}
-              to={`/properties/${property.id}`}  // Link to details page by id
-              style={{ textDecoration: 'none', color: 'inherit' }}
-            >
-              <PropertyCard
-                property={property}
-                onSendEmail={() => handleSendEmail(property.id)}
-              />
-            </Link>
+            <div key={property.id} className="property-card-wrapper">
+              <Link
+                to={`/properties/${property.id}`}
+                className="property-link"
+              >
+                <PropertyCard
+                  property={property}
+                  onSendEmail={() => handleSendEmail(property.id)}
+                />
+              </Link>
+            </div>
           ))}
         </div>
       ) : (

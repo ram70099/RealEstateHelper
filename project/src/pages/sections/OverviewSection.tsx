@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import {
   Building2,
   DollarSign,
@@ -11,8 +12,7 @@ import {
   Send,
   CheckCircle,
   Mail,
-  TrendingUp,
-  BarChart2
+  TrendingUp
 } from 'lucide-react';
 
 type Broker = {
@@ -55,31 +55,11 @@ type Props = {
   onEmailSent: () => void;
 };
 
-const OverviewSection: React.FC<Props> = ({ property, propertyEmails, onEmailSent }) => {
-  const [showEmailForm, setShowEmailForm] = useState(false);
-  const [message, setMessage] = useState('');
-  const [emailSent, setEmailSent] = useState(false);
-
-  const broker: Broker = property.brokers?.[0] || {
-    name: 'N/A',
-    phone: 'N/A',
-    email: 'N/A',
-  };
+const OverviewSection: React.FC<Props> = ({ property }) => {
+  const navigate = useNavigate();
 
   const handleContactBroker = () => {
-    setShowEmailForm(true);
-    setEmailSent(false);
-  };
-
-  const handleSendEmail = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Simulate sending email delay
-    setTimeout(() => {
-      onEmailSent();
-      setShowEmailForm(false);
-      setMessage('');
-      setEmailSent(true);
-    }, 1000);
+    navigate('/contact-broker', { state: { property } });
   };
 
   const getStatusColor = (status: string) => {
@@ -179,7 +159,7 @@ const OverviewSection: React.FC<Props> = ({ property, propertyEmails, onEmailSen
           </div>
         </div>
 
-        {/* RIGHT SIDEBAR - Email Form & Summary */}
+        {/* RIGHT SIDEBAR - Summary & Contact Broker CTA */}
         <div className="overview-sidebar">
           <div className="info-card property-summary-card">
             <div className="card-header">
@@ -208,103 +188,18 @@ const OverviewSection: React.FC<Props> = ({ property, propertyEmails, onEmailSen
             </div>
           </div>
 
-          {/* Email Form */}
-          {!emailSent && !showEmailForm && (
-            <div className="info-card contact-prompt-card">
-              <div className="card-header">
-                <h3>Interested in this property?</h3>
-                <Mail size={20} className="card-icon" />
-              </div>
-              <p className="contact-prompt">Get more details and schedule a viewing</p>
-              <button className="contact-cta-button" onClick={handleContactBroker}>
-                <Send size={16} />
-                Contact Broker
-              </button>
+          {/* Contact Broker Button */}
+          <div className="info-card contact-prompt-card">
+            <div className="card-header">
+              <h3>Interested in this property?</h3>
+              <Mail size={20} className="card-icon" />
             </div>
-          )}
-
-          {!emailSent && showEmailForm && (
-            <motion.div 
-              className="info-card email-form-card"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="card-header">
-                <h3>Contact the Broker</h3>
-                <Mail size={20} className="card-icon" />
-              </div>
-
-              <p className="form-intro">💬 Interested in this property? Drop a quick message below:</p>
-
-              <form onSubmit={handleSendEmail} className="email-form">
-                <textarea
-                  required
-                  rows={4}
-                  placeholder="Hi! I'm interested in this property. Could you provide more details about availability and pricing?"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  className="message-textarea"
-                />
-
-                <div className="form-actions">
-                  <button type="submit" className="send-button primary">
-                    <Send size={16} /> Send Message
-                  </button>
-                  <button
-                    type="button"
-                    className="send-button secondary"
-                    onClick={() => setShowEmailForm(false)}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
-            </motion.div>
-          )}
-
-          {emailSent && (
-            <motion.div 
-              className="info-card email-sent-card"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="success-header">
-                <CheckCircle size={24} className="success-icon" />
-                <h3>Message Sent Successfully!</h3>
-              </div>
-              <p className="success-message">
-                Your inquiry has been sent to {broker.name}. They will contact you shortly with more information about this property.
-              </p>
-              
-              <div className="market-insights">
-                <h4>Market Insights</h4>
-                <div className="insights-grid">
-                  <div className="insight-item">
-                    <TrendingUp size={16} />
-                    <span>High demand in {property.submarket}</span>
-                  </div>
-                  <div className="insight-item">
-                    <Calendar size={16} />
-                    <span>Average response time: 24 hours</span>
-                  </div>
-                </div>
-              </div>
-              
-              <button
-                className="send-button secondary"
-                onClick={() => {
-                  setEmailSent(false);
-                  setShowEmailForm(true);
-                }}
-              >
-                <Send size={16} />
-                Send Another Message
-              </button>
-            </motion.div>
-          )}
-
+            <p className="contact-prompt">Get more details and schedule a viewing</p>
+            <button className="contact-cta-button" onClick={handleContactBroker}>
+              <Send size={16} />
+              Contact Broker
+            </button>
+          </div>
         </div>
       </div>
     </div>

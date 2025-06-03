@@ -28,3 +28,9 @@ class ExtractedDataResponse(BaseModel):
 class PropertyResponse(BaseModel):
     status: str
     data: List[Property]
+
+class ContactBrokerRequest(BaseModel):
+    brokerEmail: str
+    brokerName: str
+    propertyTitle: str
+    message: str

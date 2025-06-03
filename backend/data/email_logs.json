@@ -1,12 +1,48 @@
 [
   {
+    "id": "2",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 2501 Commerce",
+    "body": "Dear Arlette Molina,\n\nWe are interested in the following property:\n\nTitle: 2501 Commerce\nAddress: 2501 Commerce, Houston, Texas 77003\nRent: \u20b9$19.00 SF/year/NNN\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-03T06:10:45.196249"
+  },
+  {
+    "id": "2",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 2501 Commerce",
+    "body": "Dear Edgar Davis,\n\nWe are interested in the following property:\n\nTitle: 2501 Commerce\nAddress: 2501 Commerce, Houston, Texas 77003\nRent: \u20b9$19.00 SF/year/NNN\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-03T06:10:45.446972"
+  },
+  {
+    "id": "6",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 1005 Hutchins St - East Blocks",
+    "body": "Dear Ryan Barbles,\n\nWe are interested in the following property:\n\nTitle: 1005 Hutchins St - East Blocks\nAddress: 1005 Hutchins St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-03T06:10:46.160859"
+  },
+  {
+    "id": "6",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 1005 Hutchins St - East Blocks",
+    "body": "Dear Matthew Asvestas,\n\nWe are interested in the following property:\n\nTitle: 1005 Hutchins St - East Blocks\nAddress: 1005 Hutchins St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-03T06:10:46.479261"
+  },
+  {
     "id": "7",
     "from": "Agent",
     "to": "shah70099053@gmail.com",
     "subject": "Interest in Property: 908 Live Oak St - Building 7",
     "body": "Dear Ryan Barbles,\n\nWe are interested in the following property:\n\nTitle: 908 Live Oak St - Building 7\nAddress: 908 Live Oak St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-02T13:12:36.584585"
+    "timestamp": "2025-06-03T06:10:46.727206"
   },
   {
     "id": "7",
@@ -15,7 +51,7 @@
     "subject": "Interest in Property: 908 Live Oak St - Building 7",
     "body": "Dear Matthew Asvestas,\n\nWe are interested in the following property:\n\nTitle: 908 Live Oak St - Building 7\nAddress: 908 Live Oak St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-02T13:12:37.113128"
+    "timestamp": "2025-06-03T06:10:47.068001"
   },
   {
     "id": "8",
@@ -24,7 +60,7 @@
     "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
     "body": "Dear Robert LaCoure,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-02T13:12:37.878803"
+    "timestamp": "2025-06-03T06:10:47.629696"
   },
   {
     "id": "8",
@@ -33,7 +69,7 @@
     "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
     "body": "Dear Jill Nesloney,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-02T13:12:38.172932"
+    "timestamp": "2025-06-03T06:10:48.363672"
   },
   {
     "id": "8",
@@ -42,16 +78,7 @@
     "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
     "body": "Dear Mike Pittman,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-02T13:12:38.921047"
-  },
-  {
-    "id": "8",
-    "from": "Agent",
-    "to": "shah70099053@gmail.com",
-    "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
-    "body": "Dear Bryce Adams,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
-    "status": "sent",
-    "timestamp": "2025-06-02T13:12:39.441573"
+    "timestamp": "2025-06-03T06:10:48.665449"
   },
   {
     "id": "8",
@@ -60,6 +87,33 @@
     "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
     "body": "Dear Michael Burgower,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-02T13:12:40.281019"
+    "timestamp": "2025-06-03T06:10:48.975017"
+  },
+  {
+    "id": "8",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
+    "body": "Dear Bryce Adams,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-03T06:10:49.395863"
+  },
+  {
+    "id": "manual-1748913409.791789",
+    "from": "Agent",
+    "to": "arlette.molina@example.com",
+    "subject": "Message Regarding Property: 2501 Commerce",
+    "body": "Hi, I'm interested in this property. Please get in touch with me with more details.",
+    "status": "sent",
+    "timestamp": "2025-06-03T06:46:53.300924"
+  },
+  {
+    "id": "manual-1748913575.312105",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Message Regarding Property: 2501 Commerce",
+    "body": "Hi, I'm interested in this property. Please get in touch with me with more details.",
+    "status": "sent",
+    "timestamp": "2025-06-03T06:49:38.802812"
   }
 ]
