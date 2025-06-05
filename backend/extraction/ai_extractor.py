@@ -92,26 +92,6 @@ Guidelines:
 - Extract numbers, dates, and specific requirements
 - Skip any irrelevant information
 
-Example input:
-Email Subject: Re: Property ID: 123
-Email Body: Thank you for your interest. The property is still available. We can offer a 2-year lease with 3 months free rent. Please let me know if you'd like to schedule a viewing.
-
-Example output:
-{
-    "availability_status": "available",
-    "lease_terms": {
-        "duration": "2 years",
-        "special_offer": "3 months free rent"
-    },
-    "next_steps": ["Schedule property viewing"],
-    "response_type": "positive",
-    "key_details": {
-        "property_id": "123",
-        "offer_made": true,
-        "flexible_terms": true
-    }
-}
-
 Remember:
 - Create keys based on the actual content
 - No predefined structure

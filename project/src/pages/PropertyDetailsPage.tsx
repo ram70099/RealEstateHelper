@@ -42,6 +42,7 @@ type EmailLog = {
 };
 
 const API_EMAIL_LOGS_URL = "http://localhost:8000/api/email_logs";
+const API_SYNC_URL = "http://localhost:8000/api/analyze-dealer-replies";
 
 const PropertyDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -51,11 +52,34 @@ const PropertyDetailsPage: React.FC = () => {
   const [activeSection, setActiveSection] = useState('overview');
   const [propertyEmails, setPropertyEmails] = useState<EmailLog[]>([]);
 
+ const syncPropertyWithBackend = async (prop: Property) => {
+  try {
+    const response = await fetch(API_SYNC_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: prop.title,
+        property_data: prop,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to sync property with backend');
+    }
+
+    const result = await response.json();
+    console.log('Property synced successfully. Result:', result);
+  } catch (error) {
+    console.error('Error syncing property:', error);
+  }
+};
+
   useEffect(() => {
     const fetchPropertyAndEmails = async () => {
       setLoading(true);
 
-      // Load properties from localStorage or elsewhere
       const storedProperties = localStorage.getItem('propertyData');
       if (!storedProperties || !id) {
         navigate('/properties');
@@ -71,13 +95,15 @@ const PropertyDetailsPage: React.FC = () => {
           return;
         }
 
-        // Fix missing broker emails
+        // Ensure every broker has an email
         found.brokers = found.brokers.map(broker => ({
           ...broker,
-          email: broker.email || `${broker.name.toLowerCase().replace(/ /g, '.')}@example.com`
+          email: broker.email || `${broker.name.toLowerCase().replace(/ /g, '.')}@example.com`,
         }));
 
-        // Fetch emails from API filtered by property ID
+        // 🔄 Sync to backend on page load
+        await syncPropertyWithBackend(found);
+
         const response = await fetch(API_EMAIL_LOGS_URL);
         if (!response.ok) throw new Error('Failed to fetch emails');
         const allEmails: EmailLog[] = await response.json();
@@ -97,7 +123,12 @@ const PropertyDetailsPage: React.FC = () => {
     fetchPropertyAndEmails();
   }, [id, navigate]);
 
-  // Update property email_sent flag & persist in localStorage
+  const handleFetchLatest = async () => {
+    if (property) {
+      await syncPropertyWithBackend(property);
+    }
+  };
+
   const updateEmailSent = () => {
     if (!property) return;
 
@@ -171,7 +202,7 @@ const PropertyDetailsPage: React.FC = () => {
         </button>
 
         <div className="header-actions">
-          <button className="back-button">
+          <button className="back-button" onClick={handleFetchLatest}>
             <RefreshCcw size={18} />
             Fetch Latest Data
           </button>

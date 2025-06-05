@@ -1,18 +1,17 @@
 {
-  "timestamp": "2025-06-04T20:30:34.368151",
+  "timestamp": "2025-06-05T10:48:28.293104",
   "responses": [
     {
-      "response_status": "acknowledged",
-      "property_interest": {
-        "title": "4500 Harrisburg Blvd",
-        "address": "4500 Harrisburg Blvd, Houston, Texas 77011"
+      "property_id": "908 Live Oak St - Building 7",
+      "property_address": "908 Live Oak St, Houston, Texas 77003",
+      "rent_increase": {
+        "percentage": 10,
+        "fixed_amount": 30
       },
-      "next_steps": [
-        "Share best rent or offer details"
-      ],
-      "inquiry_details": {
-        "inquirer": "Real Estate Agent Bot",
-        "email": "ramrattan099@gmail.com"
+      "availability_status": "available",
+      "key_details": {
+        "response_received": true,
+        "response_type": "informative"
       }
     }
   ],

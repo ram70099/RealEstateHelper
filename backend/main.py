@@ -6,15 +6,18 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from dealer_reply_ai import analyze_dealer_replies
 from extraction.pdf_utils import extract_pdf_text, extract_property_images_from_pdf
-from extraction.ai_extractor import run_property_extraction
+from extraction.ai_extractor import run_property_extraction, analyze_dealer_reply
+from dealer_reply_ai import get_gmail_service, fetch_recent_reply_emails, extract_email_body,extract_subject_from_email
 from utils import logger, send_email, load_json, save_json
 from models import PropertyResponse
 from models import ContactBrokerRequest
 from dotenv import load_dotenv
 from datetime import datetime
 import aiofiles
+from typing import Dict, Any
 import asyncio
 from typing import Optional
+from pydantic import BaseModel
 
 load_dotenv()
 
@@ -179,6 +182,107 @@ Real Estate Contact Bot
         logger.error(f"Failed to send contact message to {data.brokerEmail}: {e}")
         raise HTTPException(status_code=500, detail="Failed to send message. Please try again.")
     
-@app.get("/api/analyze-dealer-replies")
-async def api_analyze_dealer_replies():
-    return await analyze_dealer_replies()
+class AnalyzeRequest(BaseModel):
+    title: str
+    property_data: dict
+
+def compare_property_data(old_data: Dict[str, Any], analyzed_reply: Dict[str, Any]) -> Dict[str, Any]:
+    changes = {}
+    messages = []
+    latest_data = old_data.copy()
+
+    # Handle rent changes
+    new_rent_info = analyzed_reply.get("proposed_rent_change", {})
+    if new_rent_info:
+        pct = new_rent_info.get("percentage_increase", 0)
+        add_charge = new_rent_info.get("additional_charge", 0)
+
+        try:
+            old_rent = float(re.sub(r"[^\d.]", "", str(old_data.get("rent", 0))))
+            updated_rent = round(old_rent * (1 + pct / 100) + add_charge, 2)
+            latest_data["rent"] = updated_rent
+            changes["rent"] = {
+                "from": old_rent,
+                "to": updated_rent,
+                "reason": f"Dealer proposed {pct}% increase + ₹{add_charge} extra"
+            }
+            messages.append(f"Rent updated from ₹{old_rent} to ₹{updated_rent} (↑ {pct}% + ₹{add_charge})")
+        except Exception as e:
+            messages.append("Failed to parse rent info")
+
+    # Handle status change
+    old_status = old_data.get("status", "").strip().lower()
+    new_status = analyzed_reply.get("status", "").strip().lower()
+    if new_status and new_status != old_status:
+        latest_data["status"] = new_status
+        changes["status"] = {
+            "from": old_status,
+            "to": new_status
+        }
+        messages.append(f"Status changed from '{old_status}' to '{new_status}'")
+
+    # Availability notes
+    old_notes = old_data.get("availability_notes", "").strip()
+    new_notes = analyzed_reply.get("availability_notes", "").strip()
+    if new_notes and new_notes != old_notes:
+        latest_data["availability_notes"] = new_notes
+        changes["availability_notes"] = {
+            "from": old_notes,
+            "to": new_notes
+        }
+        messages.append("Availability notes were updated.")
+
+    # Suggestion logic (basic)
+    suggestion = "Buy"
+    if "rent" in changes and changes["rent"]["to"] > float(re.sub(r"[^\d.]", "", str(old_data.get("rent", 0)))) * 1.3:
+        suggestion = "Don't buy — rent increased too much"
+    elif latest_data.get("status", "") in ["unavailable", "not available"]:
+        suggestion = "Don't buy — not available"
+
+    latest_data["changes"] = changes
+    latest_data["suggestion"] = suggestion
+
+    return {
+        "latest_data": latest_data,
+        "changes": changes,
+        "summary": messages,
+        "suggestion": suggestion
+    }
+
+
+@app.post("/api/analyze-dealer-replies")
+async def analyze_dealer_replies_api(req: AnalyzeRequest):
+    try:
+        service = get_gmail_service()
+        title_lower = req.title.lower()
+        query = f'in:inbox subject:"{title_lower}" OR body:"{title_lower}"'
+
+        emails = await fetch_recent_reply_emails(service, query=query)
+
+        if emails:
+            for email in emails:
+                subject = extract_subject_from_email(email).lower()
+                body = extract_email_body(email).lower()
+
+                if title_lower in subject or title_lower in body:
+                    result = await analyze_dealer_reply(req.property_data, body)
+                    comparison = compare_property_data(req.property_data, result)
+
+                    return {
+                        "status": "success",
+                        "source": "email_match",
+                        "title": req.title,
+                        "summary": result,
+                        "comparison": comparison
+                    }
+
+        return {
+            "status": "fallback",
+            "source": "original_data",
+            "summary": req.property_data,
+            "comparison": None
+        }
+
+    except Exception as e:
+        logger.error(f"Failed to analyze dealer replies: {str(e)}", exc_info=True)
+        raise HTTPException(status_code=500, detail="Dealer reply analysis failed")

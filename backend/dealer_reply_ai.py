@@ -1,19 +1,18 @@
 import os
 import base64
-from datetime import datetime, timedelta
+import json
+import re
+import ssl
+import asyncio
+from datetime import datetime
 from fastapi import HTTPException
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
-from google.auth.transport.requests import AuthorizedSession
-from utils import logger
-import asyncio
 import httplib2
+from utils import logger
 from extraction.ai_extractor import dealer_response_analyzer
-import json
-import ssl
-import re
 
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 TOKEN_PATH = 'token.json'
@@ -35,18 +34,15 @@ def get_gmail_service():
             token_file.write(creds.to_json())
 
     try:
-        # Create authorized HTTP client with SSL configuration
+        # Create Gmail service with SSL verification disabled (if needed)
         http = httplib2.Http(timeout=30)
         http.disable_ssl_certificate_validation = True
-        
-        # Configure SSL context
+
         ssl_context = ssl.create_default_context()
         ssl_context.check_hostname = False
         ssl_context.verify_mode = ssl.CERT_NONE
-        
-        return build('gmail', 'v1', 
-                    credentials=creds,
-                    cache_discovery=False)
+
+        return build('gmail', 'v1', credentials=creds, cache_discovery=False)
     except Exception as e:
         logger.error(f"Failed to create Gmail service: {str(e)}")
         raise HTTPException(
@@ -58,10 +54,7 @@ def get_gmail_service():
 async def fetch_email(service, user_id, msg_id):
     try:
         loop = asyncio.get_event_loop()
-        # Create a new HTTP client for each request
-        http = httplib2.Http(timeout=30)
-        http.disable_ssl_certificate_validation = True
-        
+
         def fetch():
             try:
                 return service.users().messages().get(
@@ -81,18 +74,17 @@ async def fetch_email(service, user_id, msg_id):
 
 async def fetch_recent_reply_emails(service, user_id='me', query=None):
     if query is None:
-        # Get today's date in YYYY/MM/DD format
         today = datetime.now().strftime('%Y/%m/%d')
         query = f'in:inbox subject:"Re:" after:{today}'
 
     try:
         logger.info(f"Fetching emails with query: {query}")
         response = service.users().messages().list(
-            userId=user_id, 
+            userId=user_id,
             q=query,
             maxResults=50
         ).execute()
-        
+
         messages = response.get('messages', [])
         if not messages:
             logger.info("No messages found matching the criteria")
@@ -131,11 +123,19 @@ def extract_email_body(email_message):
         return ""
 
 
+def extract_subject_from_email(email_message):
+    headers = email_message.get("payload", {}).get("headers", [])
+    for header in headers:
+        if header.get("name", "").lower() == "subject":
+            return header.get("value", "")
+    return ""
+
+
 async def analyze_dealer_replies():
     try:
         service = get_gmail_service()
         emails = await fetch_recent_reply_emails(service)
-        
+
         if not emails:
             return {"emails": [], "message": "No new reply emails found"}
 
@@ -146,50 +146,49 @@ async def analyze_dealer_replies():
                 subject = next((h['value'] for h in headers if h['name'].lower() == 'subject'), "")
                 body = extract_email_body(email)
 
-                # Use the dealer_response_analyzer agent to analyze the email
                 task = f"""
 Email Subject: {subject}
 Email Body: {body}
 """
                 analysis_result = None
+
                 async for message in dealer_response_analyzer.run_stream(task=task):
-                    if message.content:
-                        try:
-                            # Extract JSON from the response
-                            json_blocks = re.findall(r"```json(.*?)```", message.content, flags=re.DOTALL)
-                            if json_blocks:
-                                json_text = json_blocks[-1].strip()
-                            else:
-                                # Try to find JSON in the content
-                                json_text = message.content.strip()
-                                # Remove any non-JSON text before the first {
-                                json_text = json_text[json_text.find('{'):]
-                                # Remove any non-JSON text after the last }
-                                json_text = json_text[:json_text.rfind('}')+1]
+                    content = message.content.strip()
+                    if not content:
+                        continue
 
-                            if json_text:
-                                analysis_result = json.loads(json_text)
-                                break
-                        except Exception as e:
-                            logger.error(f"Error parsing AI response: {str(e)}")
-                            logger.error(f"Raw content: {message.content}")
-                            continue
+                    try:
+                        json_blocks = re.findall(r"```json(.*?)```", content, flags=re.DOTALL)
+                        if json_blocks:
+                            json_text = json_blocks[-1].strip()
+                        else:
+                            json_text = content
+                            start = json_text.find('{')
+                            end = json_text.rfind('}') + 1
+                            json_text = json_text[start:end]
 
-                # Only include the analysis result if we got valid JSON
+                        analysis_result = json.loads(json_text)
+                        break
+                    except Exception as e:
+                        logger.error(f"Error parsing AI response: {e}")
+                        logger.error(f"Raw AI response content:\n{content}")
+                        continue
+
                 if analysis_result:
                     email_replies.append(analysis_result)
+                else:
+                    logger.warning(f"No valid JSON extracted for subject: {subject}")
 
             except Exception as e:
                 logger.error(f"Error processing email: {str(e)}")
                 continue
 
-        # Save the latest data to a JSON file
         latest_data = {
             "timestamp": datetime.now().isoformat(),
             "responses": email_replies,
             "total_processed": len(email_replies)
         }
-        
+
         with open('latest_dealer_replies.json', 'w') as f:
             json.dump(latest_data, f, indent=2)
 
@@ -209,21 +208,3 @@ Email Body: {body}
                 "error": str(e)
             }
         )
-
-async def get_original_property_data(property_id: str):
-    """
-    Get the original property data from your database or storage.
-    This is a placeholder - implement according to your data storage solution.
-    """
-    try:
-        # TODO: Implement actual data retrieval from your database
-        # For now, return a sample structure
-        return {
-            "id": property_id,
-            "rent": 5000,
-            "status": "available",
-            "notes": "Original property details"
-        }
-    except Exception as e:
-        logger.error(f"Error fetching original property data: {str(e)}")
-        return None
