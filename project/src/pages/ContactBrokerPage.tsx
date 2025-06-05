@@ -96,7 +96,7 @@ const ContactBrokerPage: React.FC = () => {
     <div className="contact-page">
       <div className="page-header">
         <button 
-          className="back-nav-button"
+          className="back-nav-buttons"
           onClick={() => navigate(-1)}
           aria-label="Go back"
         >

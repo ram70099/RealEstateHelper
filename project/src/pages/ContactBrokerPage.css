@@ -254,7 +254,7 @@ textarea::placeholder, .message-textarea::placeholder {
   margin: 0 0 1.5rem 0;
 }
 
-.back-button {
+.back-buttons {
   background: var(--color-primary);
   color: white;
   border: none;

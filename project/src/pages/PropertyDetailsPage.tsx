@@ -72,7 +72,7 @@ const PropertyDetailsPage: React.FC = () => {
     const result = await response.json();
     console.log('Property synced successfully. Result:', result);
   } catch (error) {
-    console.error('Error syncing property:', error);
+    console.error('Error syncing property:', error);``
   }
 };
 
