@@ -52,80 +52,72 @@ const PropertyDetailsPage: React.FC = () => {
   const [activeSection, setActiveSection] = useState('overview');
   const [propertyEmails, setPropertyEmails] = useState<EmailLog[]>([]);
 
- const syncPropertyWithBackend = async (prop: Property) => {
-  try {
-    const response = await fetch(API_SYNC_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        title: prop.title,
-        property_data: prop,
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to sync property with backend');
-    }
-
-    const result = await response.json();
-    console.log('Property synced successfully. Result:', result);
-  } catch (error) {
-    console.error('Error syncing property:', error);``
-  }
-};
-
+  // Only load from localStorage on mount
   useEffect(() => {
-    const fetchPropertyAndEmails = async () => {
-      setLoading(true);
-
-      const storedProperties = localStorage.getItem('propertyData');
-      if (!storedProperties || !id) {
+    setLoading(true);
+    const storedProperties = localStorage.getItem('propertyData');
+    if (!storedProperties || !id) {
+      navigate('/properties');
+      return;
+    }
+    try {
+      const parsedProperties: Property[] = JSON.parse(storedProperties);
+      const found = parsedProperties.find(p => p.id === id);
+      if (!found) {
         navigate('/properties');
         return;
       }
-
-      try {
-        const parsedProperties: Property[] = JSON.parse(storedProperties);
-        const found = parsedProperties.find(p => p.id === id);
-
-        if (!found) {
-          navigate('/properties');
-          return;
-        }
-
-        // Ensure every broker has an email
-        found.brokers = found.brokers.map(broker => ({
-          ...broker,
-          email: broker.email || `${broker.name.toLowerCase().replace(/ /g, '.')}@example.com`,
-        }));
-
-        // 🔄 Sync to backend on page load
-        await syncPropertyWithBackend(found);
-
-        const response = await fetch(API_EMAIL_LOGS_URL);
-        if (!response.ok) throw new Error('Failed to fetch emails');
-        const allEmails: EmailLog[] = await response.json();
-
-        const relatedEmails = allEmails.filter(e => e.propertyId === id);
-
-        setProperty(found);
-        setPropertyEmails(relatedEmails);
-      } catch (error) {
-        console.error('Error fetching data', error);
-        navigate('/properties');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPropertyAndEmails();
+      setProperty(found);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching data', error);
+      navigate('/properties');
+      setLoading(false);
+    }
   }, [id, navigate]);
 
+  // Only call API when button is clicked
   const handleFetchLatest = async () => {
-    if (property) {
-      await syncPropertyWithBackend(property);
+    if (!property) return;
+    setLoading(true);
+    try {
+      const response = await fetch(API_SYNC_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: property.title,
+          property_data: property,
+        }),
+      });
+      if (!response.ok) throw new Error('Failed to sync property with backend');
+      const result = await response.json();
+
+      if (
+        result.status === 'success' &&
+        result.source === 'email_match' &&
+        result.comparison &&
+        result.comparison.latest_data
+      ) {
+        setProperty(result.comparison.latest_data);
+
+        // Optionally update localStorage
+        const storedProperties = localStorage.getItem('propertyData');
+        if (storedProperties) {
+          const parsedProperties: Property[] = JSON.parse(storedProperties);
+          const index = parsedProperties.findIndex(p => p.id === property.id);
+          if (index !== -1) {
+            parsedProperties[index] = result.comparison.latest_data;
+            localStorage.setItem('propertyData', JSON.stringify(parsedProperties));
+          }
+        }
+      } else {
+        // Fallback: keep showing localStorage data
+      }
+    } catch (error) {
+      // Fallback: keep showing localStorage data
+      console.error('Error syncing property:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
