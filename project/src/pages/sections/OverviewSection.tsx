@@ -115,17 +115,17 @@ const OverviewSection: React.FC<Props> = ({ property }) => {
                   <span>{property.submarket}</span>
                 </div>
               </div>
-              
+
               <div className="property-stats">
                 <div className="stat-item">
                   <DollarSign size={20} />
                   <div className="stat-content">
                     <span className="stat-label">Rent</span>
-                   {property.rent && typeof property.rent === 'object' && 'amount' in property.rent && 'frequency' in property.rent ? (
-  <span>{property.rent.amount} / {property.rent.frequency}</span>
-) : (
-  <span>{property.rent}</span> // fallback if it's just a string
-)}
+                    {property.rent && typeof property.rent === 'object' && 'amount' in property.rent && 'frequency' in property.rent ? (
+                      <span>{property.rent.amount} / {property.rent.frequency}</span>
+                    ) : (
+                      <span>{property.rent}</span> // fallback if it's just a string
+                    )}
                   </div>
                 </div>
                 <div className="stat-item">

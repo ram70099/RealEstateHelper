@@ -1,101 +1,119 @@
 [
   {
+    "id": "4",
+    "from": "Agent",
+    "to": "anuisahu309@gmail.com",
+    "subject": "Interest in Property: 2600 Commerce St - 2600 Commerce",
+    "body": "Dear Jeffrey Kaplan,\n\nWe are interested in the following property:\n\nTitle: 2600 Commerce St - 2600 Commerce\nAddress: 2600 Commerce St, Houston, Texas 77003\nRent: \u20b9$18.00 SF/year/NNN\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-06T07:19:04.348555"
+  },
+  {
     "id": "1",
     "from": "Agent",
     "to": "anuisahu309@gmail.com",
     "subject": "Interest in Property: 3901 Capitol St - Ironworks Campus",
-    "body": "Dear Deidre Young,\n\nWe are interested in the following property:\n\nTitle: 3901 Capitol St - Ironworks Campus\nAddress: 3901 Capitol St, Houston, Texas 77023 (Harris County)\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "body": "Dear Deidre Young,\n\nWe are interested in the following property:\n\nTitle: 3901 Capitol St - Ironworks Campus\nAddress: 3901 Capitol St, Houston, Texas 77023\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-05T05:28:09.441572"
-  },
-  {
-    "id": "2",
-    "from": "Agent",
-    "to": "anuisahu309@gmail.com",
-    "subject": "Interest in Property: 2501 Commerce",
-    "body": "Dear Arlette Molina,\n\nWe are interested in the following property:\n\nTitle: 2501 Commerce\nAddress: 2501 Commerce, Houston, Texas 77003 (Harris County)\nRent: \u20b9$19.00 SF/year/NNN\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
-    "status": "sent",
-    "timestamp": "2025-06-05T05:28:10.239497"
+    "timestamp": "2025-06-06T07:19:05.046281"
   },
   {
     "id": "6",
     "from": "Agent",
     "to": "anuisahu309@gmail.com",
     "subject": "Interest in Property: 1005 Hutchins St - East Blocks",
-    "body": "Dear Ryan Barbles,\n\nWe are interested in the following property:\n\nTitle: 1005 Hutchins St - East Blocks\nAddress: 1005 Hutchins St, Houston, Texas 77003 (Harris County)\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "body": "Dear Ryan Barbles,\n\nWe are interested in the following property:\n\nTitle: 1005 Hutchins St - East Blocks\nAddress: 1005 Hutchins St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-05T05:28:10.644087"
-  },
-  {
-    "id": "5",
-    "from": "Agent",
-    "to": "anuisahu309@gmail.com",
-    "subject": "Interest in Property: 3302 Canal St - The Plant Second Ward",
-    "body": "Dear Jeffrey Kaplan,\n\nWe are interested in the following property:\n\nTitle: 3302 Canal St - The Plant Second Ward\nAddress: 3302 Canal St, Houston, Texas 77003 (Harris County)\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
-    "status": "sent",
-    "timestamp": "2025-06-05T05:28:11.024441"
+    "timestamp": "2025-06-06T07:19:05.617322"
   },
   {
     "id": "6",
     "from": "Agent",
     "to": "anuisahu309@gmail.com",
     "subject": "Interest in Property: 1005 Hutchins St - East Blocks",
-    "body": "Dear Matthew Asvestas,\n\nWe are interested in the following property:\n\nTitle: 1005 Hutchins St - East Blocks\nAddress: 1005 Hutchins St, Houston, Texas 77003 (Harris County)\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "body": "Dear Matthew Asvestas,\n\nWe are interested in the following property:\n\nTitle: 1005 Hutchins St - East Blocks\nAddress: 1005 Hutchins St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-05T05:28:11.792814"
+    "timestamp": "2025-06-06T07:19:06.032338"
   },
   {
     "id": "7",
     "from": "Agent",
     "to": "anuisahu309@gmail.com",
     "subject": "Interest in Property: 908 Live Oak St - Building 7",
-    "body": "Dear Ryan Barbles,\n\nWe are interested in the following property:\n\nTitle: 908 Live Oak St - Building 7\nAddress: 908 Live Oak St, Houston, Texas 77003 (Harris County)\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "body": "Dear Matthew Asvestas,\n\nWe are interested in the following property:\n\nTitle: 908 Live Oak St - Building 7\nAddress: 908 Live Oak St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-05T05:28:12.214928"
+    "timestamp": "2025-06-06T07:19:06.794550"
+  },
+  {
+    "id": "7",
+    "from": "Agent",
+    "to": "anuisahu309@gmail.com",
+    "subject": "Interest in Property: 908 Live Oak St - Building 7",
+    "body": "Dear Ryan Barbles,\n\nWe are interested in the following property:\n\nTitle: 908 Live Oak St - Building 7\nAddress: 908 Live Oak St, Houston, Texas 77003\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "status": "sent",
+    "timestamp": "2025-06-06T07:19:07.141435"
   },
   {
     "id": "8",
     "from": "Agent",
     "to": "anuisahu309@gmail.com",
     "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
-    "body": "Dear Robert LaCoure,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011 (Harris County)\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "body": "Dear Robert LaCoure,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-05T05:28:12.684373"
+    "timestamp": "2025-06-06T07:19:07.587677"
   },
   {
     "id": "8",
     "from": "Agent",
     "to": "anuisahu309@gmail.com",
     "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
-    "body": "Dear Michael Burgower,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011 (Harris County)\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "body": "Dear Jill Nesloney,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-05T05:28:13.432503"
+    "timestamp": "2025-06-06T07:19:08.002224"
   },
   {
     "id": "8",
     "from": "Agent",
     "to": "anuisahu309@gmail.com",
     "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
-    "body": "Dear Bryce Adams,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011 (Harris County)\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "body": "Dear Bryce Adams,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-05T05:28:13.865834"
+    "timestamp": "2025-06-06T07:19:08.400816"
   },
   {
     "id": "8",
     "from": "Agent",
     "to": "anuisahu309@gmail.com",
     "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
-    "body": "Dear Jill Nesloney,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011 (Harris County)\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "body": "Dear Mike Pittman,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-05T05:28:14.338125"
+    "timestamp": "2025-06-06T07:19:08.822160"
   },
   {
     "id": "8",
     "from": "Agent",
     "to": "anuisahu309@gmail.com",
     "subject": "Interest in Property: 4500 Harrisburg Blvd - 4400 Harrisburg",
-    "body": "Dear Mike Pittman,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011 (Harris County)\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
+    "body": "Dear Michael Burgower,\n\nWe are interested in the following property:\n\nTitle: 4500 Harrisburg Blvd - 4400 Harrisburg\nAddress: 4500 Harrisburg Blvd, Houston, Texas 77011\nRent: \u20b9Withheld\n\nPlease share your best rent or offer details.\n\nRegards,\nReal Estate Agent Bot\n",
     "status": "sent",
-    "timestamp": "2025-06-05T05:28:14.817371"
+    "timestamp": "2025-06-06T07:19:09.602436"
+  },
+  {
+    "id": "manual-1749175132.817898",
+    "from": "Agent",
+    "to": "anuisahu309@gmail.com",
+    "subject": "Message Regarding Property: 3901 Capitol St - Ironworks Campus",
+    "body": "Hi, I'm interested in this property. Please get in touch with me with more details.",
+    "status": "sent",
+    "timestamp": "2025-06-06T07:28:57.850029"
+  },
+  {
+    "id": "manual-1749175248.59105",
+    "from": "Agent",
+    "to": "shah70099053@gmail.com",
+    "subject": "Message Regarding Property: 3901 Capitol St - Ironworks Campus",
+    "body": "Hi, I'm interested in this property. Please get in touch with me with more details.",
+    "status": "sent",
+    "timestamp": "2025-06-06T07:30:53.763308"
   }
 ]
