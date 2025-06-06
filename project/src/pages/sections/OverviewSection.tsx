@@ -27,7 +27,7 @@ type Property = {
   notes: string;
   image_url: string;
   address: string;
-  rent: string;
+  rent: string | { amount: string | number; frequency: string };
   status: string;
   property_type: string;
   submarket: string;
@@ -121,7 +121,11 @@ const OverviewSection: React.FC<Props> = ({ property }) => {
                   <DollarSign size={20} />
                   <div className="stat-content">
                     <span className="stat-label">Rent</span>
-                    <span className="stat-value">{property.rent || 'Withheld'}</span>
+                   {property.rent && typeof property.rent === 'object' && 'amount' in property.rent && 'frequency' in property.rent ? (
+  <span>{property.rent.amount} / {property.rent.frequency}</span>
+) : (
+  <span>{property.rent}</span> // fallback if it's just a string
+)}
                   </div>
                 </div>
                 <div className="stat-item">

@@ -1,0 +1,45 @@
+.map-section {
+  margin-top: 1rem;
+  background: var(--card-bg, #1e1e1e);
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  color: var(--text-color, #eee);
+  position: relative;
+}
+
+.map-section h3 {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Spinner container styles */
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px; /* same as iframe height to avoid layout shift */
+  gap: 0.75rem;
+  color: var(--text-muted, #aaa);
+  font-size: 1rem;
+}
+
+/* Spinner animation */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #4f46e5; /* cool blue/purple */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Spin keyframes */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

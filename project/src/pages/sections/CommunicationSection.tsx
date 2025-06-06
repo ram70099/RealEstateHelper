@@ -1,130 +1,103 @@
-// src/pages/sections/CommunicationSection.tsx
-import React, { useState } from 'react';
-import { Mail, Send } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import './CommunicationSection.css';
 
-type EmailLog = {
-  id: string;
-  propertyId: string;
-  subject: string;
-  to: string;
+type Message = {
   from: string;
-  status: 'sent' | 'pending' | 'failed';
-  timestamp: string;
-  message?: string;
+  body: string;
+  date: string;
 };
 
-type Broker = {
-  name: string;
-  phone: string;
-  email: string;
-  company?: string;
-  experience?: string;
-};
-
-type Property = {
-  id: string;
-  title: string;
-  notes: string;
-  image_url: string;
-  address: string;
-  rent: string;
-  status: string;
-  property_type: string;
-  submarket: string;
-  available_sf?: number;
-  size_sf?: number;
-  built_year?: number;
-  brokers: Broker[];
-  email_sent: boolean;
-  email_error: string | null;
+type Conversation = {
+  threadId: string;
+  messages: Message[];
 };
 
 type Props = {
-  property: Property;
-  propertyEmails: EmailLog[];
-  onNewEmail: (email: EmailLog) => void;
+  property: {
+    title: string;
+    address: string;
+  };
 };
 
-const CommunicationSection: React.FC<Props> = ({ property, propertyEmails, onNewEmail }) => {
-  const [message, setMessage] = useState('');
-  const [isSending, setIsSending] = useState(false);
+const CommunicationSection: React.FC<Props> = ({ property }) => {
+  const [conversations, setConversations] = useState<Conversation[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [openThreadId, setOpenThreadId] = useState<string | null>(null);
 
-  const handleSendEmail = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!message.trim()) return;
+  const fetchedOnce = useRef(false);
 
-    setIsSending(true);
+  useEffect(() => {
+    if (fetchedOnce.current) return;
+    fetchedOnce.current = true;
 
-    // Simulate API call
-    setTimeout(() => {
-      const newEmail: EmailLog = {
-        id: Date.now().toString(),
-        propertyId: property.id,
-        subject: `Inquiry about ${property.title}`,
-        to: property.brokers[0]?.email || 'broker@example.com',
-        from: 'user@example.com',
-        status: 'sent',
-        timestamp: new Date().toISOString(),
-        message,
-      };
-      onNewEmail(newEmail);
-      setMessage('');
-      setIsSending(false);
-    }, 1000);
+    const fetchConversations = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch('http://localhost:8000/api/get-email-history', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: property.title, address: property.address }),
+        });
+
+        if (!res.ok) throw new Error('Network error');
+
+        const data = await res.json();
+
+        // Map API data to expected format
+        if (Array.isArray(data.conversations)) {
+          const mapped = data.conversations.map((conv: any) => ({
+            threadId: conv.thread_id,
+            messages: conv.messages.map((msg: any) => ({
+              from: msg.from_email,
+              body: msg.body,
+              date: msg.timestamp,
+            })),
+          }));
+          setConversations(mapped);
+        } else {
+          setConversations([]);
+        }
+      } catch (e) {
+        setConversations([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchConversations();
+  }, [property.title, property.address]);
+
+  const toggleConversation = (threadId: string) => {
+    setOpenThreadId(prev => (prev === threadId ? null : threadId));
   };
 
-  return (
-    <div className="communication-section">
-      <motion.div
-        className="email-history"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
-        <h3>Email History</h3>
-        {propertyEmails.length === 0 ? (
-          <p>No emails sent yet.</p>
-        ) : (
-          <ul className="email-list">
-            {propertyEmails.map((email) => (
-              <li key={email.id} className="email-item">
-                <div className="email-header">
-                  <span className="email-subject">{email.subject}</span>
-                  <span className={`email-status ${email.status}`}>{email.status}</span>
-                </div>
-                <div className="email-meta">
-                  <span>To: {email.to}</span>
-                  <span>From: {email.from}</span>
-                  <span>{new Date(email.timestamp).toLocaleString()}</span>
-                </div>
-                {email.message && <p className="email-message">{email.message}</p>}
-              </li>
-            ))}
-          </ul>
-        )}
-      </motion.div>
+  if (loading) {
+    return <div className="communication-section">Loading email conversations...</div>;
+  }
 
-      <motion.div
-        className="email-form"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
-        <h3>Send a Message</h3>
-        <form onSubmit={handleSendEmail}>
-          <textarea
-            rows={4}
-            placeholder="Type your message here..."
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            disabled={isSending}
-          />
-          <button type="submit" disabled={isSending}>
-            {isSending ? 'Sending...' : 'Send Message'}
-            <Send size={16} />
-          </button>
-        </form>
-      </motion.div>
-    </div>
+  return (
+    <section className="communication-section">
+      <h3>Email History</h3>
+      {conversations.length === 0 && (
+        <div className="no-emails">No email conversations found for this property.</div>
+      )}
+      {conversations.map(({ threadId, messages }) => (
+        <div key={threadId} className="conversation">
+          <div className="conversation-header" onClick={() => toggleConversation(threadId)}>
+            Thread ID: {threadId}
+            <span className="toggle-icon">{openThreadId === threadId ? '▲' : '▼'}</span>
+          </div>
+          {openThreadId === threadId &&
+            messages.map((msg, idx) => (
+              <div key={idx} className="message-item">
+                <strong>From:</strong> {msg.from} <br />
+                <small>{new Date(msg.date).toLocaleString()}</small>
+                <p>{msg.body}</p>
+              </div>
+            ))}
+        </div>
+      ))}
+    </section>
   );
 };
 

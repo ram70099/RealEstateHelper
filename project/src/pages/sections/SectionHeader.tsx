@@ -9,7 +9,7 @@ const SectionHeader: React.FC<Props> = ({ activeSection, setActiveSection }) => 
   const sections = [
     { id: 'overview', title: 'Overview' },
     { id: 'communication', title: 'Communication' },
-    { id: 'suggestions', title: 'Agent Suggestions' }
+    { id: 'suggestions', title: 'Map View' }
   ];
 
   return (

@@ -9,6 +9,7 @@ from extraction.pdf_utils import extract_pdf_text, extract_property_images_from_
 from extraction.ai_extractor import run_property_extraction, analyze_dealer_reply
 from dealer_reply_ai import get_gmail_service, fetch_recent_reply_emails, extract_email_body,extract_subject_from_email
 from utils import logger, send_email, load_json, save_json
+from email_utils import fetch_reply_details
 from models import PropertyResponse
 from models import ContactBrokerRequest
 from dotenv import load_dotenv
@@ -368,3 +369,26 @@ async def analyze_dealer_replies_api(req: AnalyzeRequest):
             "summary": req.property_data,
             "comparison": comparison
         }
+    
+
+class EmailHistoryRequest(BaseModel):
+    title: str
+    address: str
+
+@app.post("/api/get-email-history")
+async def get_email_history(req: EmailHistoryRequest):
+    try:
+        query = f'{req.title} {req.address}'
+        service = get_gmail_service()
+        user_email = "ramrattan099.com"  # Set your actual email here to detect sent/received
+        raw_conversations = await asyncio.to_thread(fetch_reply_details, service, query, user_email)
+
+        return {
+            "status": "success",
+            "count": len(raw_conversations),
+            "conversations": raw_conversations
+        }
+
+    except Exception as e:
+        logger.error(f"Error fetching email history: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch email history.")

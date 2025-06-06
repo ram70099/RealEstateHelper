@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Download, RefreshCcw } from 'lucide-react';
+import { ArrowLeft, RefreshCcw } from 'lucide-react';
 import { motion } from 'framer-motion';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import SectionHeader from './sections/SectionHeader';
 import OverviewSection from './sections/OverviewSection';
+import CommunicationSection from './sections/CommunicationSection'; // 💬 New import
+import AgentMapSection from './sections/AgentMapSection'; // 🗺️ Map view
+
 import './PropertyDetailsPage.css';
 
 type Broker = {
@@ -52,7 +55,6 @@ const PropertyDetailsPage: React.FC = () => {
   const [activeSection, setActiveSection] = useState('overview');
   const [propertyEmails, setPropertyEmails] = useState<EmailLog[]>([]);
 
-  // Only load from localStorage on mount
   useEffect(() => {
     setLoading(true);
     const storedProperties = localStorage.getItem('propertyData');
@@ -76,7 +78,6 @@ const PropertyDetailsPage: React.FC = () => {
     }
   }, [id, navigate]);
 
-  // Only call API when button is clicked
   const handleFetchLatest = async () => {
     if (!property) return;
     setLoading(true);
@@ -100,7 +101,6 @@ const PropertyDetailsPage: React.FC = () => {
       ) {
         setProperty(result.comparison.latest_data);
 
-        // Optionally update localStorage
         const storedProperties = localStorage.getItem('propertyData');
         if (storedProperties) {
           const parsedProperties: Property[] = JSON.parse(storedProperties);
@@ -110,11 +110,8 @@ const PropertyDetailsPage: React.FC = () => {
             localStorage.setItem('propertyData', JSON.stringify(parsedProperties));
           }
         }
-      } else {
-        // Fallback: keep showing localStorage data
       }
     } catch (error) {
-      // Fallback: keep showing localStorage data
       console.error('Error syncing property:', error);
     } finally {
       setLoading(false);
@@ -123,9 +120,7 @@ const PropertyDetailsPage: React.FC = () => {
 
   const updateEmailSent = () => {
     if (!property) return;
-
     const updatedProperty = { ...property, email_sent: true };
-
     const storedProperties = localStorage.getItem('properties');
     if (storedProperties) {
       try {
@@ -155,24 +150,26 @@ const PropertyDetailsPage: React.FC = () => {
     switch (activeSection) {
       case 'overview':
         return (
-          <OverviewSection 
-            property={property!} 
+          <OverviewSection
+            property={property!}
             propertyEmails={propertyEmails}
             onEmailSent={updateEmailSent}
           />
         );
       case 'communication':
-        return <div className="section-placeholder">Communication section coming soon...</div>;
-      case 'suggestions':
-        return <div className="section-placeholder">Agent suggestions section coming soon...</div>;
-      default:
         return (
-          <OverviewSection 
-            property={property!} 
-            propertyEmails={propertyEmails}
-            onEmailSent={updateEmailSent}
+          <CommunicationSection
+            property={property!}
+            emails={propertyEmails}
+            onNewEmail={(newEmail) => setPropertyEmails(prev => [...prev, newEmail])}
           />
         );
+      
+      case 'suggestions':
+        return (
+          <AgentMapSection address={property!.address} />
+        );
+
     }
   };
 
@@ -203,11 +200,11 @@ const PropertyDetailsPage: React.FC = () => {
 
       {property && (
         <>
-          <SectionHeader 
+          <SectionHeader
             activeSection={activeSection}
             setActiveSection={setActiveSection}
           />
-          
+
           <motion.div
             key={activeSection}
             className="section-content"
